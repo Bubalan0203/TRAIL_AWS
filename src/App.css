@@ -1,0 +1,56 @@
+:root{
+    --background: #18171b;
+    --navbar-width: 22vw;
+    --navbar-width-min: 80px;
+    --navbar-dark-primary: #25272d;
+    --navbar-dark-secondary: black;
+    --navbar-light-primary: white;
+    --navbar-light-secondary: white;
+    --nav-text:#ec008bde;
+    --icon-color:#bf2f82c4;
+    font-family: Helvetica !important;
+    --text-white:white;
+    font-family: Helvetica;
+  }
+body{
+    background-color: var(--background);
+   
+   
+}
+
+.scroll {
+    overflow-y: scroll;
+    height: 100%;
+  }
+  .scroll::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
+  .scroll::-webkit-scrollbar-thumb {
+    border-radius: 99px;
+    background-color: var(--navbar-dark-primary);
+  }
+  .scroll::-webkit-scrollbar-button {
+    height: 1px;
+  }
+
+  @media only screen and (max-width: 800px) {
+    #miniNav {
+      display: block !important;
+    }
+    #title {
+      justify-content: center !important;
+    }
+    #searchfield {
+      display: none !important;
+    }
+  }
+  #miniNav {
+    display: none;
+  }
+  #title {
+    justify-content: space-between;
+  }
+  #searchfield {
+    display: block;
+  }
