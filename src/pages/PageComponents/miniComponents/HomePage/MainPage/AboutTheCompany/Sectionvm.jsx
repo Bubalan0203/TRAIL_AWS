@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import img1 from '../../../../../../assets/mainpage/aboutthecompany/image22.jpeg';
-import img2 from '../../../../../../assets/mainpage/aboutthecompany/image22.jpeg';
-import img3 from '../../../../../../assets/mainpage/aboutthecompany/image22.jpeg';
-import img4 from '../../../../../../assets/mainpage/aboutthecompany/image22.jpeg';
-import img5 from '../../../../../../assets/mainpage/aboutthecompany/image22.jpeg';
+import img1 from '../../../../../../assets/mainpage/aboutthecompany/mimg1.jpg';
+import img2 from '../../../../../../assets/mainpage/aboutthecompany/mimg2.jpg';
+import img3 from '../../../../../../assets/mainpage/aboutthecompany/mimg3.jpg';
+import img4 from '../../../../../../assets/mainpage/aboutthecompany/mimg4.jpg';
+import img5 from '../../../../../../assets/mainpage/aboutthecompany/mimg1.jpg';
 
 // Styled Components
 const Container = styled.div`

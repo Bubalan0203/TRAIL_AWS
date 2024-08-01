@@ -1,37 +1,42 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
+import { useInView } from 'react-intersection-observer';
+import { Fade } from 'react-awesome-reveal';
 
 const Sec6 = () => {
   const [activeTab, setActiveTab] = useState(1);
+  const { ref, inView } = useInView({ triggerOnce: true });
 
   const tabs = [
     {
       id: 1,
       title: 'Individual Attention',
-      content: 'Students receive personalized guidance tailored to their specific needs, allowing tutors to focus on individual strengths and weaknesses. This one-on-one attention ensures that each student fully understands the material, asks questions without hesitation, and progresses at their own pace. ',
+      content: 'Students receive personalized guidance tailored to their specific needs, allowing tutors to focus on individual strengths and weaknesses. This one-on-one attention ensures that each student fully understands the material, asks questions without hesitation, and progresses at their own pace.',
     },
     {
       id: 2,
       title: 'Boosts Confidence',
-      content: 'One-on-one tutoring helps build students confidence in their abilities. Personalized attention and tailored feedback foster a positive learning environment, encouraging students to take risks and tackle challenging subjects. As students see their progress and understand complex concepts, their self-esteem grows. ',
+      content: 'One-on-one tutoring helps build students confidence in their abilities. Personalized attention and tailored feedback foster a positive learning environment, encouraging students to take risks and tackle challenging subjects. As students see their progress and understand complex concepts, their self-esteem grows.',
     },
     {
       id: 3,
       title: 'Homework and Test Guidance',
-      content: 'Tutors provide assistance with homework and prepare students for class tests, ensuring that they thoroughly understand their assignments and are well-prepared for assessments. By offering step-by-step guidance and clarifying doubts, tutors help students complete their homework accurately and on time. ',
+      content: 'Tutors provide assistance with homework and prepare students for class tests, ensuring that they thoroughly understand their assignments and are well-prepared for assessments. By offering step-by-step guidance and clarifying doubts, tutors help students complete their homework accurately and on time.',
     },
     {
       id: 4,
       title: 'K-12 Education System',
-      content: 'TIA LIVE TUTOR supports the K-12 education system, offering comprehensive educational support from Kindergarten to 12th grade. This inclusive approach ensures that students receive consistent and high-quality tutoring throughout their academic journey. The platform provides age-appropriate learning materials and teaching methods. ',
+      content: 'TIA LIVE TUTOR supports the K-12 education system, offering comprehensive educational support from Kindergarten to 12th grade. This inclusive approach ensures that students receive consistent and high-quality tutoring throughout their academic journey. The platform provides age-appropriate learning materials and teaching methods.',
     },
   ];
 
   return (
-    <Container>
-      <Header>
-        <HeaderTitle>Advantages For School Students</HeaderTitle>
-      </Header>
+    <Container ref={ref}>
+      <Fade direction="up" duration={800} triggerOnce>
+        <Header>
+          <HeaderTitle>Advantages For School Students</HeaderTitle>
+        </Header>
+      </Fade>
       <ContentContainer>
         <Tabs>
           {tabs.map((tab) => (
@@ -48,12 +53,14 @@ const Sec6 = () => {
         {tabs.map(
           (tab) =>
             activeTab === tab.id && (
-              <TabContent key={tab.id}>
-                <TabText>
-                  <TabTitle>{tab.title}</TabTitle>
-                  <TabDescription>{tab.content}</TabDescription>
-                </TabText>
-              </TabContent>
+              <Fade direction="up" duration={800} triggerOnce key={tab.id}>
+                <TabContent>
+                  <TabText>
+                    <TabTitle>{tab.title}</TabTitle>
+                    <TabDescription>{tab.content}</TabDescription>
+                  </TabText>
+                </TabContent>
+              </Fade>
             )
         )}
       </ContentContainer>

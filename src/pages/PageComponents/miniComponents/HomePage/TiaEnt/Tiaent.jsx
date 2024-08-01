@@ -6,7 +6,6 @@ import Section2 from './Section2';
 import Section3 from './Section3';
 import Section4 from './Section4';
 import Section5 from './Section5';
-import Section6 from './Section6';
 import Navbar from '../MainPage/Navbar';
 import Footer from '../MainPage/Footer';
 
@@ -37,7 +36,7 @@ const Tiaent = () => {
       <div style={isMobile ? mobileSectionStyle  :bodyStyle}><Section3 /></div>
       <div style={isMobile ? mobileSectionStyle  :bodyStyle}><Section4 /></div>
       <div style={isMobile ? mobileSectionStyle  :bodyStyle}><Section5 /></div>
-      <div style={isMobile ? mobileSectionStyle  :bodyStyle}><Section6 /></div>
+      
       <Footer />
     </div>
   );

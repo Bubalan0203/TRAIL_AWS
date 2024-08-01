@@ -66,7 +66,7 @@ const Section5 = () => {
 };
 
 const ProductDetailsContainer = styled.div`
-  height:80vh;
+  height:80vh;!important
   width: 100%;
   color: white;
   font-family: Helvetica;
@@ -77,7 +77,7 @@ const ProductDetailsContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height:100vh;
+    min-height:100vh;!important
     text-align: center;
     overflow: hidden;
     padding: 20px;
@@ -105,6 +105,7 @@ const ProductDetailsContainer = styled.div`
 
   .content h3 {
     color: #f00d88;
+    text-align:center;
   }
 
   .details {

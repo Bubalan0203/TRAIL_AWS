@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import img1 from '../../../../../assets/Shewin/Influence.jpg';// Make sure this path is correct
+import styled, { keyframes, css } from 'styled-components';
+import { useInView } from 'react-intersection-observer';
+import img1 from '../../../../../assets/Shewin/Influence.jpg'; // Ensure this path is correct
 import img2 from '../../../../../assets/Shewin/Trends.jpeg';
 import img3 from '../../../../../assets/Shewin/Challenges.jpg';
 import img4 from '../../../../../assets/Shewin/Leadership.jpeg';
 import img5 from '../../../../../assets/Shewin/Expections.jpg';
 import img6 from '../../../../../assets/Shewin/Networks.jpeg';
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 const Container = styled.div`
   font-family: Helvetica, sans-serif;
@@ -18,6 +30,11 @@ const Container = styled.div`
 const Header = styled.div`
   font-size: 2rem;
   font-weight: bold;
+  ${({ inView }) =>
+    inView &&
+    css`
+      animation: ${fadeIn} 1s ease-out;
+    `}
 `;
 
 const Nav = styled.nav`
@@ -31,22 +48,22 @@ const Nav = styled.nav`
   gap: 15px;
   margin: 0 29%;
 
-   @media (max-width: 1268px) {
+  @media (max-width: 1268px) {
     padding: 10px;
     gap: 10px;
-    margin: 0 0%;
+    margin: 0;
   }
 
   @media (max-width: 768px) {
     padding: 10px;
     gap: 10px;
-    margin: 0 0%;
+    margin: 0;
   }
 
   @media (max-width: 600px) {
     padding: 10px;
     gap: 0;
-    margin: 0 0%;
+    margin: 0;
   }
 `;
 
@@ -103,6 +120,11 @@ const TextContent = styled.div`
 const SectionHeader = styled.div`
   font-size: 1.8rem;
   font-weight: bold;
+  ${({ inView }) =>
+    inView &&
+    css`
+      animation: ${fadeIn} 1s ease-out;
+    `}
 
   @media (max-width: 768px) {
     font-size: 1.6rem;
@@ -137,50 +159,53 @@ const SectionButton = styled.button`
 
 const Image = styled.img`
   max-width: 80%;
-  height:300px;
+  height: 300px;
 `;
 
 const sections = {
   Influence: {
-    header: "Cultural Influences",
-    text: "Cultural values, norms, and customs significantly shape women’s entrepreneurship, influencing both opportunities and barriers. Traditionally, gender roles have confined women to household and caregiving responsibilities, limiting their access to income-earning opportunities. These cultural expectations perpetuate biases that hinder women from fully participating in entrepreneurial activities.",
+    header: 'Cultural Influences',
+    text: 'Cultural values, norms, and customs significantly shape women’s entrepreneurship, influencing both opportunities and barriers. Traditionally, gender roles have confined women to household and caregiving responsibilities, limiting their access to income-earning opportunities. These cultural expectations perpetuate biases that hinder women from fully participating in entrepreneurial activities.',
     image: img1,
   },
   Trends: {
-    header: "Positive Cultural Trends",
-    text: "Despite these barriers, cultural shifts are recognizing and valuing women’s capabilities in business. Skills developed through multitasking, interpersonal communication, and empathy—often honed through household responsibilities—are increasingly seen as assets in entrepreneurial contexts. As more women assume leadership roles in business, societal acceptance and institutional support grow, reducing cultural barriers and legitimizing women in leadership positions.",
+    header: 'Positive Cultural Trends',
+    text: 'Despite these barriers, cultural shifts are recognizing and valuing women’s capabilities in business. Skills developed through multitasking, interpersonal communication, and empathy—often honed through household responsibilities—are increasingly seen as assets in entrepreneurial contexts. As more women assume leadership roles in business, societal acceptance and institutional support grow, reducing cultural barriers and legitimizing women in leadership positions.',
     image: img2,
   },
   Challenges: {
-    header: "Challenges in Gender Bias",
-    text: "Women often face bias in leadership roles due to stereotypes about female leadership styles. Role incongruity theory suggests that perceptions of leadership qualities clash with societal expectations of female behavior, leading to discrimination against women leaders. This bias, reinforced by a think-leader, think-male mindset, hampers women’s access to funding and professional networks necessary for entrepreneurial success.",
+    header: 'Challenges in Gender Bias',
+    text: 'Women often face bias in leadership roles due to stereotypes about female leadership styles. Role incongruity theory suggests that perceptions of leadership qualities clash with societal expectations of female behavior, leading to discrimination against women leaders. This bias, reinforced by a think-leader, think-male mindset, hampers women’s access to funding and professional networks necessary for entrepreneurial success.',
     image: img3,
   },
   Leadership: {
-    header: "Positive Attributes of Women’s Leadership",
-    text: "Conversely, qualities traditionally associated with women—such as collaboration, empathy, and community-building—prove invaluable in leadership roles. Research highlights women’s strengths in fostering diverse teams, managing relationships, and navigating global business environments. These skills are pivotal in building successful entrepreneurial ventures and fostering inclusive workplace cultures.",
+    header: 'Positive Attributes of Women’s Leadership',
+    text: 'Conversely, qualities traditionally associated with women—such as collaboration, empathy, and community-building—prove invaluable in leadership roles. Research highlights women’s strengths in fostering diverse teams, managing relationships, and navigating global business environments. These skills are pivotal in building successful entrepreneurial ventures and fostering inclusive workplace cultures.',
     image: img4,
   },
   Expectations: {
-    header: "Gender Role Expectations",
-    text: "Stereotypes associating women with communal and nurturing traits, rather than assertiveness and independence, create additional challenges. These stereotypes create a mismatch between perceived female leadership characteristics and societal expectations, making it harder for women to succeed in entrepreneurial ventures. This discrepancy often results in limited funding opportunities and smaller professional networks compared to men.",
+    header: 'Gender Role Expectations',
+    text: 'Stereotypes associating women with communal and nurturing traits, rather than assertiveness and independence, create additional challenges. These stereotypes create a mismatch between perceived female leadership characteristics and societal expectations, making it harder for women to succeed in entrepreneurial ventures. This discrepancy often results in limited funding opportunities and smaller professional networks compared to men.',
     image: img5,
   },
   Networks: {
-    header: "Role Models and Support Networks",
-    text: "Role models play a crucial role in empowering women entrepreneurs. Role models, often family members or peers, inspire and support aspiring female entrepreneurs, shaping their beliefs in their own capabilities. Family support and networks of peers provide essential resources and encouragement, helping women overcome barriers and achieve entrepreneurial success.",
+    header: 'Role Models and Support Networks',
+    text: 'Role models play a crucial role in empowering women entrepreneurs. Role models, often family members or peers, inspire and support aspiring female entrepreneurs, shaping their beliefs in their own capabilities. Family support and networks of peers provide essential resources and encouragement, helping women overcome barriers and achieve entrepreneurial success.',
     image: img6,
   },
 };
 
 const App = () => {
   const [activeSection, setActiveSection] = useState('Influence');
+  const { ref: headerRef, inView: headerInView } = useInView({ triggerOnce: true });
 
   return (
     <Container>
-      <Header>Cultural Influences on Women’s Entrepreneurship</Header>
+      <Header ref={headerRef} inView={headerInView}>
+        Cultural Influences on Women’s Entrepreneurship
+      </Header>
       <Nav>
-        {Object.keys(sections).map(section => (
+        {Object.keys(sections).map((section) => (
           <NavItem
             key={section}
             active={activeSection === section}
@@ -193,7 +218,7 @@ const App = () => {
       <Section>
         <Image src={sections[activeSection].image} alt={sections[activeSection].header} />
         <TextContent>
-          <SectionHeader>{sections[activeSection].header}</SectionHeader>
+          <SectionHeader inView={headerInView}>{sections[activeSection].header}</SectionHeader>
           <SectionText>{sections[activeSection].text}</SectionText>
         </TextContent>
       </Section>

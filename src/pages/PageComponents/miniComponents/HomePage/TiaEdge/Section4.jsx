@@ -27,20 +27,21 @@ const Container = styled.div`
   box-sizing: border-box;
   width: 100%;
   max-height: 100vh;
+  height:480px;
   transition: transform 0.5s ease-in-out;
   position: absolute;
   overflow-y: auto;
 
   @media (max-width: 1024px) {
-    padding: 30px;
+    padding: 40px;
   }
 
   @media (max-width: 768px) {
-    padding: 20px;
+    padding: 40px;
   }
 
   @media (max-width: 480px) {
-    padding: 15px;
+    padding: 35px;
   }
 
   @media (max-height: 600px) {
@@ -256,7 +257,7 @@ const items = [
   { icon:  <FaShieldAlt />, mainText: "SSC CPO ", subText: "Central Police Organisation", modalContent: "The SSC CPO exam recruits candidates for police departments such as Delhi Police, CISF, and CAPF. It includes physical and written tests to select Assistant SubInspectors and Sub-Inspectors. " },
   { icon: <FaShieldAlt/>, mainText: "SSC GD ", subText: "General Duty Constable", modalContent: "The SSC GD exam is conducted to recruit General Duty Constables for various government departments. It includes a physical test, written exam, and medical examination. " },
   { icon: <FaFileAlt />, mainText: "SSC MTS", subText: "Multi-Tasking Staff", modalContent: "The SSC MTS exam recruits candidates for various non-technical posts in central government departments. It includes a computer-based test followed by a descriptive paper. " },
-  { icon: <FaKeyboard />, mainText: "SSC Stenographer ", subText: "", modalContent: "The SSC Stenographer exam recruits candidates for Stenographer Grade C and D posts in various government ministries and departments. The selection processincludes a computer-based test and a skill test in stenography. " },
+  { icon: <FaKeyboard />, mainText: "SSC Stenographer ", subText: "", modalContent: "The SSC Stenographer exam recruits candidates for Stenographer Grade C and D posts in various government ministries and departments. The selection process includes a computer-based test and a skill test in stenography. " },
   { icon: <FaTrain />, mainText: "RRB ALP", subText: "Assistant Loco Pilot", modalContent: "The RRB ALP exam is conducted by the Railway Recruitment Board to recruit Assistant Loco Pilots. This exam includes a computer-based test and a skill test. " },
 ];
 

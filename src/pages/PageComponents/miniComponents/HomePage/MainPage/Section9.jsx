@@ -28,6 +28,12 @@ const TestimonialContainer = styled.div`
   border-radius: 35px;
   margin-top: 20px;
   max-width: 80%;
+  box-shadow: 0px 4px 8px rgba(2.9, 2.9, 6.9, 11.99);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+
+  &:hover {
+    transform: scale(1.03);
+  }
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -44,11 +50,16 @@ const TestimonialImage = styled.img`
   height: 300px;
   border-radius: 30px;
   margin-bottom: 0px;
+  transition: transform 0.3s ease;
 
   @media (min-width: 768px) {
     max-width: none;
     width: 28%;
     margin-right: 40px;
+  }
+
+  ${TestimonialContainer}:hover & {
+    transform: scale(1.01);
   }
 `;
 
@@ -64,15 +75,15 @@ const TestimonialContent = styled.div`
 
 const Button = styled.button`
   padding: 10px 20px; /* Reduced padding for better button size */
-   background-color: #f14bb4;
+  background-color: #f14bb4;
   border: none;
   border-radius: 25px;
   cursor: pointer;
   font-size: 15px;
   color: white;
-  
+
   &:hover {
-  background-color: #333;
+    background-color: #333;
   }
 
   @media (min-width: 768px) {
@@ -84,7 +95,7 @@ const Button = styled.button`
     width: 120px;
     height: 38px;
   }
-  
+
   @media (max-width: 1024px) {
     font-size: 11px;
     width: 90px;
@@ -96,6 +107,7 @@ const Button = styled.button`
 const TestimonialText = styled.p`
   max-width: 100%;
   font-size: 18px;
+  color: #666;
 
   @media (min-width: 768px) {
     font-size: 18px;
@@ -124,10 +136,10 @@ const Section9 = () => {
         <TestimonialContent>
           <Title>TIA PLAY</Title>
           <TestimonialText>
-            TIA PLAY prioritizes children's safety and freedom within boundaries, fostering an international outlook and encouraging responsible decision-making. They aim to develop children into independent, morally upright individuals through physical, mental, and spiritual education, ensuring a smooth transition to primary school with a focus on literacy and readiness.
+          TIA PLAY prioritizes children's safety and freedom within boundaries, fostering an international outlook and encouraging responsible decision-making. They aim to develop children into independent, morally upright individuals through physical, mental, and spiritual education, ensuring a smooth transition to primary school with a focus on literacy and readiness.
           </TestimonialText>
           <a href="/tiaplay">
-          <Button>Know More</Button>
+            <Button>Know More</Button>
           </a>
         </TestimonialContent>
       </TestimonialContainer>

@@ -28,29 +28,30 @@ const useIntersectionObserver = (options) => {
 };
 
 const Section3 = () => {
-  const [setNode, entry] = useIntersectionObserver({ threshold: 0.9 });
+  const [setNode, entry] = useIntersectionObserver({ threshold: 0.8 });
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     if (entry && entry.isIntersecting) {
-      entry.target.classList.add('fade-in');
-      entry.target.classList.add('hover-effect');
-    } else if (entry) {
+      setIsVisible(true);
     }
   }, [entry]);
 
   return (
-    <Container className="container-fluid">
+    <Container className="container-fluid"  >
       <Content className="row">
-        <Title className="col-12">Indian Education System Compared To Foreign System</Title>
+        <Title isVisible={isVisible} className="col-12">
+          Indian Education System Compared To Foreign System
+        </Title>
         <TextContainer className="col-12 col-md-5">
-          <SubTitle>Why Foreign Education System is better than Indian Education System?</SubTitle>
+          <SubTitle isVisible={isVisible}>Why Foreign Education System is better than Indian Education System?</SubTitle>
         </TextContainer>
         <TextContainer className="col-12 col-md-7">
-          <Text>
-            Education system in India is worse than foreign countries including US, countries of
-            UK and Gulf countries. This is the known fact. We all know it; but why? Why foreign
-            education system is better than Indian education system? Today I will list out few
-            differences between Indian Education System and Foreign Education System. Have a look.
+          <Text isVisible={isVisible}>
+            Education system in India is worse than foreign countries including the US, countries of
+            the UK, and Gulf countries. This is a known fact. We all know it; but why? Why is the foreign
+            education system better than the Indian education system? Today, I will list a few
+            differences between the Indian Education System and the Foreign Education System. Have a look.
           </Text>
         </TextContainer>
         <ImageContainer ref={setNode} className="col-12">
@@ -70,12 +71,14 @@ const fadeIn = keyframes`
   }
 `;
 
-const hoverEffect = keyframes`
-  from {
-    transform: scale(1);
+const slideIn = keyframes`
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
   }
-  to {
-    transform: scale(1.1);
+  100% {
+    transform: translateY(0);
+    opacity: 1;
   }
 `;
 
@@ -100,6 +103,7 @@ const Title = styled.h1`
   line-height: 1.1;
   text-align: center;
   color: #f00d88;
+  animation: ${({ isVisible }) => (isVisible ? slideIn : 'none')} 1.2s ease-in-out forwards;
 
   @media (max-width: 767px) {
     font-size: 1.2rem;
@@ -126,6 +130,7 @@ const SubTitle = styled.h2`
   line-height: 1.5;
   margin-bottom: 1rem;
   color: #f00d88;
+  animation: ${({ isVisible }) => (isVisible ? slideIn : 'none')} 1.4s ease-in-out forwards;
 
   @media (max-width: 767px) {
     font-size: 1rem;
@@ -147,6 +152,7 @@ const Text = styled.p`
   margin-bottom: 1.5rem;
   color: #fff;
   text-align: left;
+  animation: ${({ isVisible }) => (isVisible ? slideIn : 'none')} 1.6s ease-in-out forwards;
 
   @media (max-width: 767px) {
     font-size: 0.8rem;
@@ -172,7 +178,7 @@ const ImageContainer = styled.div`
   }
 
   &.hover-effect {
-    animation: ${hoverEffect} 5s ;
+    animation: ${slideIn} 1.6s ease-in-out forwards;
   }
 `;
 

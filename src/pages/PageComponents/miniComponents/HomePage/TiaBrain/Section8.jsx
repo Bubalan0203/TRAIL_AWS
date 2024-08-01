@@ -41,15 +41,11 @@ const Section9 = () => {
             {cardData.map((card, index) => (
               <div className="col-lg-6 col-md-12" data-aos="fade-up" data-aos-delay={(index + 1) * 100} key={index}>
                 <div className="card-item" style={{ background: '#232e34' }}>
-                  <div className="row no-gutters">
-                    <div className="col-xl-5 col-md-4">
-                      <div className="card-bg" style={{ backgroundImage: `url(${card.image})` }}></div>
-                    </div>
-                    <div className="col-xl-7 col-md-8 d-flex align-items-center">
-                      <div className="card-body">
-                        <h4 className="card-title">{card.title}</h4>
-                        <p>{card.content}</p>
-                      </div>
+                  <div className="card-content">
+                    <div className="card-bg" style={{ backgroundImage: `url(${card.image})` }}></div>
+                    <div className="card-body">
+                      <h4 className="card-title">{card.title}</h4>
+                      <p>{card.content}</p>
                     </div>
                   </div>
                 </div>
@@ -155,12 +151,14 @@ const cardData = [
 
 
 const VipLoginContainer = styled.div`
+
   .card-bg {
     background-size: cover;
     background-position: center;
-    height:500px;
+    height:300px;
     width:100%;
     min-height: 100px;
+  
 
     @media(max-width:768px){
      height:200px;
@@ -169,10 +167,14 @@ const VipLoginContainer = styled.div`
   .img-bg {
     background-size: cover;
     min-height: 200px;
+    
   }
   .card-body {
     padding: 0;
     color:#fff;
+   
+    
+
   }
   :root {
     --font-default: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -243,6 +245,8 @@ const VipLoginContainer = styled.div`
     margin: 0 0 10px 15px;
   }
   .section-header p {
+  justify-content:center;
+    align-items:center;
     margin: 0px auto 0px auto;
     font-family: 'Helvetica';
     font-size:18px;

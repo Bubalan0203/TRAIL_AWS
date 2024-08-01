@@ -56,7 +56,7 @@ const StyledFeature = styled.div`
   padding: 1rem;
   border-radius: 8px;
   width: calc(30% - 20px); /* Adjust width to fit three features in a row */
-  box-shadow: 0 8px 12px #3b3b3b;
+  box-shadow: 4px 8px 12px #3b3b3b;
   margin-bottom: 20px; /* Adjust margin between features */
   transition: transform 0.3s ease-in-out;
 
@@ -86,7 +86,7 @@ const StyledStat = styled.div`
   text-align: center;
   padding: 20px 50px; /* Decrease padding */
   border-radius: 8px;
-  box-shadow: 9px 15px 19px rgba(0, 0, 0, 0.1);
+  box-shadow: 9px 15px 19px rgba(0, 0, 1, 0.2);
 `;
 
 const StatValue = styled.h2`

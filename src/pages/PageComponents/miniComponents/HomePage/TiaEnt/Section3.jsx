@@ -144,7 +144,7 @@ const Container = styled.div`
   }
 
   .grid-images img {
-      width: 100%;
+    width: 100%;
     height: auto; /* Maintain aspect ratio */
     max-width: 100%; /* Ensure the image doesn't exceed the container size */
     max-height: 50vh; /* Set a max height */
@@ -312,25 +312,26 @@ const StyledButton = styled.button`
   padding: 15px;
   font-size: 1.125rem;
   cursor: pointer;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s ease, background-color 0.3s, box-shadow 0.3s;
   width: 100%;
   border: none;
   border-radius: 8px;
   background-color: #fff;
-  color:#000;!important
+  color: #000; /* Set text color to black */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   font-family: Helvetica, sans-serif;
   font-weight: 300;
   white-space: nowrap;
 
   &:hover {
+    transform: scale(1.05);
     background-color: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   }
 
   &.active {
     background-color: #f00d88;
-    color:#fff;!important
+    color: #fff; /* Set text color to white */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   }
 

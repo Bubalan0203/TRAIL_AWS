@@ -6,9 +6,11 @@ import Image3 from '../../../../../assets/Media/Spot.jpg';
 const CarouselExample = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const carouselRef = useRef(null);
+  const sectionRef = useRef(null);
   const totalItems = 3;
   const [hoverNext, setHoverNext] = useState(false);
   const [hoverPrev, setHoverPrev] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const handleNextClick = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % totalItems);
@@ -26,6 +28,30 @@ const CarouselExample = () => {
       carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
   }, [currentIndex]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
   const slides = [
     {
@@ -79,18 +105,22 @@ const CarouselExample = () => {
   } : {};
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      width: '95%',
-      maxWidth: '1100px',
-      backgroundColor: '#fff',
-      padding: '20px',
-      boxSizing: 'border-box',
-      margin: '0 auto',
-      fontFamily: 'Helvetica'
-    }}>
+    <div
+      ref={sectionRef}
+      className={`carousel-container ${isVisible ? 'visible' : ''}`}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '95%',
+        maxWidth: '1100px',
+        backgroundColor: '#fff',
+        padding: '20px',
+        boxSizing: 'border-box',
+        margin: '0 auto',
+        fontFamily: 'Helvetica'
+      }}
+    >
       <div className="header" style={{
         marginBottom: '50px',
         marginTop: '30px',
@@ -127,7 +157,7 @@ const CarouselExample = () => {
               minWidth: '100%',
               padding: '20px',
               boxSizing: 'border-box',
-              borderRadius:'15px',
+              borderRadius: '15px',
               backgroundColor: '#fff',
               margin: '20px 0',
               fontFamily: 'Helvetica'
@@ -137,7 +167,7 @@ const CarouselExample = () => {
                 alignItems: 'flex-start',
                 boxSizing: 'border-box',
                 padding: '20px',
-                borderRadius:'px',
+                borderRadius: 'px',
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                 fontFamily: 'Helvetica'
               }}>
@@ -216,6 +246,15 @@ const CarouselExample = () => {
       </div>
       <style>
         {`
+          .carousel-container {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+          }
+          .carousel-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+          }
           @media (max-width: 900px) {
             .slide-content {
               flex-direction: column !important;
@@ -245,9 +284,8 @@ const CarouselExample = () => {
             .header h2 {
               font-size: 20px !important; // Larger font size for small devices
             }
-
-            .buttonStyle{
-             bottom:50px;
+            .buttonStyle {
+              bottom: 50px;
             }
           }
           @media (min-width: 900px) {

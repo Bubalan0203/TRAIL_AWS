@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
+import { useInView } from 'react-intersection-observer';
+import { Fade } from 'react-awesome-reveal';
+
 
 const Sec6 = () => {
   const [activeTab, setActiveTab] = useState(1);
+  const { ref, inView } = useInView({ triggerOnce: true });
 
   const tabs = [
     {
@@ -23,10 +27,12 @@ const Sec6 = () => {
   ];
 
   return (
-    <Container>
-      <Header>
+    <Container ref={ref}>
+      <Fade direction="up" duration={800} triggerOnce>
+        <Header>
         <HeaderTitle>Courses We Offer</HeaderTitle>
-      </Header>
+        </Header>
+      </Fade>
       <ContentContainer>
         <Tabs>
           {tabs.map((tab) => (
@@ -43,12 +49,14 @@ const Sec6 = () => {
         {tabs.map(
           (tab) =>
             activeTab === tab.id && (
-              <TabContent key={tab.id}>
-                <TabText>
-                  <TabTitle>{tab.title}</TabTitle>
-                  <TabDescription>{tab.content}</TabDescription>
-                </TabText>
-              </TabContent>
+              <Fade direction="up" duration={800} triggerOnce key={tab.id}>
+                <TabContent>
+                  <TabText>
+                    <TabTitle>{tab.title}</TabTitle>
+                    <TabDescription>{tab.content}</TabDescription>
+                  </TabText>
+                </TabContent>
+              </Fade>
             )
         )}
       </ContentContainer>
@@ -57,7 +65,7 @@ const Sec6 = () => {
 };
 
 const Container = styled.div`
- padding-top:100px;
+  margin-top: 0;
   background-color: #0f0f12;
   color: white;
   padding: 20px;

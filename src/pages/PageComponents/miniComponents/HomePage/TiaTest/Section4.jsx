@@ -10,31 +10,40 @@ const FAQ = () => {
 
   const faqs = [
     {
-      question: "What is TIA-TEST HUB exams?",
-      answer: "TIA-TEST HUB exams are identical to the real exams. It helps one prepare for the final examination. One can understand the exam pattern, question types, and difficulty level and improve his/her exam-taking skills."
+      question: "What is TEST HUB?",
+      answer: "An online platform to take practice in cracking JEE, NEET, NTSE, OLYMPIADS, and many more. TIA-TEST HUB exams are identical to the real exams. It helps one prepare for the final examination. One can understand the exam pattern, question types, and difficulty level and improve his/her exam-taking skills."
     },
     {
-      question: " What is the importance of attempting TIA-TEST HUB test?",
-      answer: " TIA-TEST HUB tests are based on the actual exam pattern, giving a detailed examination overview so that one can have an idea about how to appear for the tests to score better marks."
+      question: "What are the advantages of TIA-TEST HUB?",
+      answer: "TIA-TEST HUB guides students through various available programs. Programs are aimed at bringing out results in competitive examinations like JEE, NEET, KVPY, Olympiads, and many more. Students can attempt a Mock Test for exams and analyze how they are scoring. Students can compare their scores while attempting the Mock Test with the minimum marks required to qualify. Mock tests help students understand recent exam trends, i.e., the exam pattern and syllabus. This will help students get acquainted with various similar-looking question papers, question patterns, marking schemes, and other aspects."
     },
     {
-      question: "How to register for TIA-TEST HUB test?",
-      answer: "The steps to register for the tests by TIA-TEST HUB are provided above on this page.  We suggest the students to follow the instructions to register with us."
+      question: "What is the importance of attempting the TIA-TEST HUB test?",
+      answer: "TIA-TEST HUB tests are based on the actual exam pattern, giving a detailed examination overview so that one can have an idea about how to appear for the tests to score better marks."
     },
     {
-      question: "Can I attempt the mock test questions of TIA-TEST HUB on a laptop?",
-      answer: "Yes, one can attempt these tests on laptops, PCs, or even mobile."
-    },
-    {
-      question: "How to prepare for Government Exams at home?",
-      answer: "Students can prepare for Government exams at home without joining any Coaching Institute by devoting 5 to 6 hours a day completely on self-study.  Students can join TIA EDGE for more results."
+      question: "List Some of the Competitive Exams?",
+      answer: (
+        <ul>
+          <li>All banking and clerical exams</li>
+          <li>UPSC and all state public service commissions</li>
+          <li>Police and military exams</li>
+          <li>Teaching and insurance exams</li>
+          <li>Finance and civil service exams (IAS, IPS, IFS)</li>
+          <li>Medical and engineering entrance exams</li>
+          <li>NEET, MBA, MCA entrance exams</li>
+          <li>Indian Air Force, Indian Navy, Indian Army</li>
+          <li>Fashion designing exams</li>
+        </ul>
+      )
     }
   ];
+
   return (
     <ProductDetailsContainer>
       <div className="faq-container">
-        <h1>Tia Test Hub - FAQ</h1>
-        <p>Here are answers to most common questions. Can't find an answer? Call us!</p>
+        <h1>TIA-TEST HUB - FAQ</h1>
+        <p>Here are answers to the most common questions. Can't find an answer? Call us!</p>
         <div className="faq-section">
           <h2>General Questions</h2>
           {faqs.map((faq, index) => (
@@ -53,51 +62,46 @@ const FAQ = () => {
 };
 
 const ProductDetailsContainer = styled.div`
-  height:auto;
+  height: auto;
   width: 100%;
   color: Black;
-  padding-top: 10px;
+  background-color: #fff; /* Added background color for contrast */
 
   .faq-container {
     font-family: Arial, sans-serif;
-    max-width:1400px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding:10px;
+    padding: 10px;
   }
-  
+
   .faq-container h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
   }
-  
+
   .faq-container p {
     font-size: 1.25rem;
     margin-bottom: 20px;
   }
-  
+
   .faq-section {
     margin-top: 20px;
   }
-  
+
   .faq-section h2 {
     font-size: 2rem;
     margin-bottom: 10px;
   }
-  
-  .faq-section h3 {
-    font-size: 1.75rem;
-    margin-bottom: 15px;
-  }
-  
+
   .faq-item {
     border-top: 1px solid #ccc;
     padding: 10px 0;
   }
-  
+
   .faq-item:first-of-type {
     border-top: none;
   }
-  
+
   .faq-question {
     display: flex;
     justify-content: space-between;
@@ -105,11 +109,11 @@ const ProductDetailsContainer = styled.div`
     font-size: 1.25rem;
     font-weight: bold;
   }
-  
+
   .faq-answer {
     padding: 10px 0;
-    font-size: 1rem;
     color: #555;
+    font-size: 1.1rem;
   }
 
   @media (max-width: 1200px) {
@@ -122,14 +126,11 @@ const ProductDetailsContainer = styled.div`
     .faq-section h2 {
       font-size: 1.75rem;
     }
-    .faq-section h3 {
-      font-size: 1.5rem;
-    }
     .faq-question {
       font-size: 1.125rem;
     }
     .faq-answer {
-      font-size: 0.875rem;
+      font-size: 0.975rem;
     }
   }
 
@@ -143,14 +144,11 @@ const ProductDetailsContainer = styled.div`
     .faq-section h2 {
       font-size: 1.5rem;
     }
-    .faq-section h3 {
-      font-size: 1.25rem;
-    }
     .faq-question {
       font-size: 1rem;
     }
     .faq-answer {
-      font-size: 0.75rem;
+      font-size: 0.85rem;
     }
   }
 
@@ -164,14 +162,11 @@ const ProductDetailsContainer = styled.div`
     .faq-section h2 {
       font-size: 1.25rem;
     }
-    .faq-section h3 {
-      font-size: 1rem;
-    }
     .faq-question {
       font-size: 0.875rem;
     }
     .faq-answer {
-      font-size: 0.625rem;
+      font-size: 0.725rem;
     }
   }
 `;

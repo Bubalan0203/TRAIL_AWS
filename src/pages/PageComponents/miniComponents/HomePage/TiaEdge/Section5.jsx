@@ -1,8 +1,34 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useRef, useEffect, useState } from 'react';
+import styled, { keyframes } from 'styled-components';
 
 const Sec4 = () => {
   const [showAll, setShowAll] = useState(false);
+  const titleRef = useRef();
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (titleRef.current) {
+      observer.observe(titleRef.current);
+    }
+
+    return () => {
+      if (titleRef.current) {
+        observer.unobserve(titleRef.current);
+      }
+    };
+  }, []);
 
   const toggleShowAll = () => {
     setShowAll(!showAll);
@@ -17,7 +43,7 @@ const Sec4 = () => {
     {
       category: 'Tia Edge',
       title: 'Attend Classes Regularly ',
-      text: 'Emphasize understanding and empathy over winning an argument or proving a point. This builds trust and shows teenagers...',
+      text: 'Emphasize understanding and empathy over winning an argument or proving a point. ',
     },
     {
       category: 'Tia Edge',
@@ -60,7 +86,7 @@ const Sec4 = () => {
     <NewsSection>
       <Container>
         <Row>
-          <Title>Goals for Effective Exam Preparation</Title>
+          <Title ref={titleRef} isVisible={isVisible}>Goals for Effective Exam Preparation</Title>
         </Row>
         <CardRow>
           {cards.slice(0, showAll ? cards.length : 3).map((card, index) => (
@@ -93,6 +119,18 @@ const Sec4 = () => {
     </NewsSection>
   );
 };
+const fadeInTop = `
+  @keyframes fadeInTop {
+    0% {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+`;
 
 const NewsSection = styled.section`
   padding: 40px 0 !important;
@@ -117,6 +155,10 @@ const Title = styled.h2`
   font-size: 2rem !important;
   font-weight: 700 !important;
   margin-bottom: 20px !important;
+  opacity: ${(props) => (props.isVisible ? 1 : 0)};
+  transform: ${(props) => (props.isVisible ? 'translateY(0)' : 'translateY(-100%)')};
+  transition: opacity 2s ease-out, transform 2s ease-out;
+  animation: ${(props) => props.isVisible && `${fadeInTop} 2s ease-out`};
 
   @media (max-width: 768px) {
     font-size: 1.5rem !important;

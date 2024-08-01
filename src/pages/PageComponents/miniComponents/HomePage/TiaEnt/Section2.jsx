@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styled from "@emotion/styled";
+import React, { useRef, useEffect, useState } from 'react';
+import styled, { keyframes, css } from 'styled-components';
 import Image1 from "../../../../../assets/Ent/Flexible.jpeg";
 import Image2 from "../../../../../assets/Ent/Autonomy.jpeg";
 import Image3 from "../../../../../assets/Ent/Belief.jpg";
@@ -38,6 +38,32 @@ const buttonData = [
 
 const TopSection = () => {
   const [activeButton, setActiveButton] = useState(0);
+  const titleRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (titleRef.current) {
+      observer.observe(titleRef.current);
+    }
+
+    return () => {
+      if (titleRef.current) {
+        observer.unobserve(titleRef.current);
+      }
+    };
+  }, []);
 
   const handleButtonClick = (index) => {
     setActiveButton(index);
@@ -57,9 +83,11 @@ const TopSection = () => {
   };
 
   return (
-    <Container>
+    <Container isVisible={isVisible}>
       <div className="container-top">
-        <h1 style={{ color: "#f00d88" }}>Advantages of Entrepreneurship</h1>
+        <h1 ref={titleRef} style={{ color: "#f00d88" }}>
+          Advantages of Entrepreneurship
+        </h1>
         <div className="grid">
           <div className="grid-buttons">
             {buttonData.map((button, index) => (
@@ -77,9 +105,10 @@ const TopSection = () => {
               <img
                 src={buttonData[activeButton].image}
                 alt={`Image ${activeButton + 1}`}
+                className={isVisible ? "visible" : ""}
               />
             </div>
-            <div className="grid-text">
+            <div className={`grid-text ${isVisible ? "visible" : ""}`}>
               <h2>{buttonData[activeButton].heading}</h2>
               <p>{buttonData[activeButton].subtext}</p>
             </div>
@@ -89,6 +118,17 @@ const TopSection = () => {
     </Container>
   );
 };
+
+const fadeInTop = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 const Container = styled.div`
   font-family: Helvetica;
@@ -110,11 +150,15 @@ const Container = styled.div`
     margin: 0;
     padding-bottom: 25px;
     font-size: 2rem; /* Default font size for larger screens */
+    opacity: ${(props) => (props.isVisible ? 1 : 0)};
+    transform: ${(props) => (props.isVisible ? 'translateY(0)' : 'translateY(-100%)')};
+    transition: opacity 2s ease-out, transform 3s ease-out;
+    animation: ${(props) => props.isVisible && css`${fadeInTop} 2s ease-out`};
   }
 
   .container-top p {
     margin-bottom: 20px;
-    font-size: 1.1rem; 
+    font-size: 1.1rem;
     text-align: justify;
   }
 
@@ -297,7 +341,7 @@ const StyledButton = styled.button`
   padding: 15px;
   font-size: 1.125rem;
   cursor: pointer;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s ease, background-color 0.3s, box-shadow 0.3s;
   width: 100%;
   border: none;
   border-radius: 8px;
@@ -308,6 +352,7 @@ const StyledButton = styled.button`
   font-weight: 300;
 
   &:hover {
+    transform: scale(1.05);
     background-color: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   }

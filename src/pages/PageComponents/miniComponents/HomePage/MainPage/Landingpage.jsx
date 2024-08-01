@@ -43,7 +43,7 @@ const FadeOverlay = styled.div`
       content: '';
     position: absolute;
     width: 100%;
-    height: 35%; /* Increased height for a larger fade effect */
+    height: 40%; /* Increased height for a larger fade effect */
     left: 0;
   }
 
@@ -59,46 +59,59 @@ const FadeOverlay = styled.div`
 `;
 
 const Content = styled.div`
-  max-width:500px;
+  max-width: 500px;
   margin: 0 auto;
   padding: 20px;
   border-radius: 10px;
   z-index: 1;
-  background-color:rgba(0,0,0,0.4);
-
+  background-color: rgba(0, 0, 0, 0.4);
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensure space between elements */
+  
   @media (min-width: 768px) {
-    margin: 0 50px;
+    margin: 0 50px; 
+    height: 430px;
   }
- @media (max-width: 768px) {
-    max-width:400px;
+  @media (max-width: 768px) {
+    max-width: 400px;
+     height: 360px;
   }
-   @media (max-width: 498px) {
-    max-width:300px;
+  @media (max-width: 498px) {
+    max-width: 330px;
+         height: 358px;
+
+    
   }
 `;
 
 const Title = styled.h1`
   font-size: 4.5rem;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   color: #FF007F;
-  font-weight:600;
+  font-weight: 600;
+  
   @media (min-width: 768px) {
     font-size: 3.5rem;
   }
-
-   @media (max-width: 768px) {
-    font-size:2.5rem;
+  @media (max-width: 768px) {
+    font-size: 39px;
   }
-
-    @media (max-width: 498px) {
-    font-size:1.5rem;
-      font-weight:600;
+  @media (max-width: 498px) {
+    font-size: 34px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+     @media (max-width: 360px) {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 10px;
   }
 `;
 
 const Subtitle = styled.p`
   font-size: 1rem;
-  margin-bottom: 30px;
   color: black;
 
   @media (min-width: 768px) {
@@ -152,11 +165,7 @@ const Landingpage = () => {
       <FadeOverlay />
       <Content>
         <Title>{text}<Cursor /></Title>
-        <Subtitle>Our learning company prioritizes continuous employee development, fostering a culture of innovation and adaptability to stay competitive in evolving markets.
-        </Subtitle>
-        <ButtonContainer>
- 
-        </ButtonContainer>
+        <Subtitle>Talent Initiators & Accelerators India private limited empowers innovative entrepreneurship.  Any venture is only as strong as the people who bring it to life.  We are here to bring life to those who bring as many innovative & creative ideas as possible.</Subtitle>
       </Content>
     </Container>
   );

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled, { keyframes, createGlobalStyle } from 'styled-components';
-import { FaArrowRight, FaTasks, FaFileAlt, FaGraduationCap, FaChalkboardTeacher, FaBook , FaFlask} from 'react-icons/fa';
+import { FaArrowRight, FaTasks, FaFileAlt, FaGraduationCap, FaChalkboardTeacher, FaBook, FaFlask } from 'react-icons/fa';
 
 const App = () => {
   const services = [
@@ -12,6 +12,27 @@ const App = () => {
     { icon: FaFlask, title: 'ICSE Practical Exams', text: 'Practical exams are crucial for subjects like Art, Physics, Indian Music, Home Science, Chemistry, Biology, Biotechnology, Computer Science, and Fashion Designing. They promote experiential learning and are essential for comprehensive understanding and good scores.' },
   ];
 
+  const servicesRef = useRef([]);
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    servicesRef.current.forEach((ref) => observer.observe(ref));
+
+    return () => {
+      servicesRef.current.forEach((ref) => observer.unobserve(ref));
+    };
+  }, []);
+
   return (
     <AppContainer>
       <GlobalStyle />
@@ -19,20 +40,13 @@ const App = () => {
       <ShortLine />
       <ServicesContainer>
         {services.map((service, index) => (
-          <ServiceBox className={index < 5 ? 'hoverable' : ''} key={index}>
-            {index < 5 ? (
-              <>
-                <service.icon className="icon" />
-                <ServiceTitle>{service.title}</ServiceTitle>
-                <ServiceText>{service.text}</ServiceText>
-              </>
-            ) : (
-              <>
-                <ServiceTitle>{service.title}</ServiceTitle>
-                <ServiceText>{service.text}</ServiceText>
-                <ContactNumber>{service.contact}</ContactNumber>
-              </>
-            )}
+          <ServiceBox 
+            key={index} 
+            ref={(el) => (servicesRef.current[index] = el)}
+          >
+            <service.icon className="icon" />
+            <ServiceTitle>{service.title}</ServiceTitle>
+            <ServiceText>{service.text}</ServiceText>
           </ServiceBox>
         ))}
       </ServicesContainer>
@@ -174,12 +188,14 @@ const ServicesContainer = styled.div`
   }
 `;
 
-const serviceHover = keyframes`
-  0% {
-    transform: scale(1);
+const fadeInTop = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  100% {
-    transform: scale(1.05);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 `;
 
@@ -195,7 +211,7 @@ const ServiceBox = styled.div`
 
   &:hover {
     background: rgba(240, 13, 136, 0.7);
-    animation: ${serviceHover} 0.3s forwards;
+    transform: scale(1.05);
   }
 
   @media (max-width: 768px) {
@@ -206,14 +222,13 @@ const ServiceBox = styled.div`
     width: 90%;
   }
 
-  &.hoverable:hover ${ArrowBox} {
-    opacity: 0.7;
-    animation: ${arrowMove} 0.3s forwards;
-  }
-
   .icon {
     font-size: 2em;
     margin-bottom: 20px;
+  }
+
+  &.animate {
+    animation: ${fadeInTop} 1.8s ease-in-out;
   }
 `;
 
@@ -228,6 +243,10 @@ const ServiceTitle = styled.h2`
   @media (max-width: 480px) {
     font-size: 1em !important;
   }
+
+  &.animate {
+    animation: ${fadeInTop} 1.5s ease-in-out;
+  }
 `;
 
 const ServiceText = styled.p`
@@ -240,6 +259,10 @@ const ServiceText = styled.p`
 
   @media (max-width: 480px) {
     font-size: 0.9em !important;
+  }
+
+  &.animate {
+    animation: ${fadeInTop} 1.8s ease-in-out;
   }
 `;
 

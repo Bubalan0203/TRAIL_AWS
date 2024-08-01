@@ -5,17 +5,43 @@ import img2 from '../../../../../assets/Brain/Brain.jpg';
 import img3 from '../../../../../assets/Brain/Indian.jpg';
 import img4 from '../../../../../assets/Brain/Ancient.jpg';
 import img5 from '../../../../../assets/Brain/Parenting.jpeg';
-import vid1 from '../../../../../assets/mainpage/videoooo.mp4'; 
+import vid1 from '../../../../../assets/mainpage/videoooo.mp4';
 
 const Section1 = ({ scrollToSection }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
   const videoRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
     <div>
-      <Section_1>
+      <Section_1 ref={sectionRef}>
         <div className="container">
-          <div className="header">
+          <Header className={isVisible ? 'visible' : ''}>
             TIA-BRAIN is a brain training program designed to awaken the dormant talents of children by training both sides of the brain. Traditional education often focuses on one side, neglecting the other. Using modern technologies and advanced brain techniques, TIA-BRAIN aims to enhance children's learning potential, preparing them to excel in academics and life. Join the Brain program to achieve your dreams and lead a happy life.
-          </div>
+          </Header>
           <div className="grid">
             <Card className="large" backgroundImage={img1}>
               <h5>RESEARCH AND EDUCATION</h5>
@@ -177,15 +203,15 @@ const Section_1 = styled.section`
       grid-template-columns: 1fr 1fr;
     }
     .large3 {
-      bottom: 70px;
+      bottom: 70px;!important
     }
 
     .large4 {
-      bottom: 40px;
+      bottom: 40px;!important
     }
 
     .large5 {
-      bottom: 65px;
+      bottom: 65px;!important
     }
   }
 `;
@@ -301,25 +327,20 @@ const VideoWrapper = styled.div`
 
 
 const Header = styled.div`
-  font-family: Helvetica;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40vh;
-  background-color: #0f0f12;
+  margin-bottom: 70px;
+  margin-top: 70px;
+  font-size: 20px;
+  opacity: 0;
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  transform: translateY(20px);
 
-  h1 {
-    font-family: Helvetica;
-    color: white;
-    font-size: 4.5em; /* Increased font size */
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-    @media (max-width: 900px) {
-      font-size: 3.5em;
-    }
-
-    @media (max-width: 600px) {
-      font-size: 3em;
-    }
+  @media (max-width: 600px) {
+    font-size: 16px;
   }
 `;
 

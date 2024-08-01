@@ -1,16 +1,28 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import img1 from '../../../../../assets/Ent/Experience.jpg'; // Make sure this path is correct
+import React, { useRef, useEffect, useState } from 'react';
+import styled, { keyframes, css } from 'styled-components';
+import img1 from '../../../../../assets/Ent/Experience.jpg';
 import img2 from '../../../../../assets/Ent/Lifestyle.jpeg';
- import img3 from '../../../../../assets/Ent/Collaboration.jpeg';
- import img4 from '../../../../../assets/Ent/Pride.jpg';  
- import img5 from '../../../../../assets/Ent/Higher.jpg'; 
- import img6 from '../../../../../assets/Ent/Success.jpeg'; 
+import img3 from '../../../../../assets/Ent/Collaboration.jpeg';
+import img4 from '../../../../../assets/Ent/Pride.jpg';
+import img5 from '../../../../../assets/Ent/Higher.jpg';
+import img6 from '../../../../../assets/Ent/Success.jpeg';
+
+const fadeInTop = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 const Container = styled.div`
   font-family: Helvetica, sans-serif;
   text-align: center;
   padding: 20px;
-  margin-bottom:40px;
+  margin-bottom: 0px;
   color: #fff;
   overflow-x: hidden;
 `;
@@ -18,35 +30,39 @@ const Container = styled.div`
 const Header = styled.div`
   font-size: 2rem;
   font-weight: bold;
+  opacity: ${(props) => (props.isVisible ? 1 : 0)};
+  transform: ${(props) => (props.isVisible ? 'translateY(0)' : 'translateY(-100%)')};
+  transition: opacity 2s ease-out, transform 2s ease-out;
+  animation: ${(props) => (props.isVisible ? css`${fadeInTop} 2s ease-out` : 'none')};
 `;
 
 const Nav = styled.nav`
   display: flex;
   padding: 10px 0;
   flex-wrap: nowrap;
-  background-color: #00;
+  background-color: #0f0f12;
   overflow-x: auto;
   white-space: nowrap;
   width: 100%;
   gap: 15px;
   margin: 0 29%;
 
-   @media (max-width: 1268px) {
+  @media (max-width: 1268px) {
     padding: 10px;
     gap: 10px;
-    margin: 0 0%;
+    margin: 0;
   }
 
   @media (max-width: 768px) {
     padding: 10px;
     gap: 10px;
-    margin: 0 0%;
+    margin: 0;
   }
 
   @media (max-width: 600px) {
     padding: 10px;
     gap: 0;
-    margin: 0 0%;
+    margin: 0;
   }
 `;
 
@@ -137,7 +153,7 @@ const SectionButton = styled.button`
 
 const Image = styled.img`
   max-width: 90%;
-  height:300px;
+  height: 300px;
 `;
 
 const sections = {
@@ -153,12 +169,12 @@ const sections = {
     image: img2,
   },
   Collaborators: {
-    header: "Freedom to Choose Collaborators:",
+    header: "Freedom to Choose Collaborators",
     text: "Entrepreneurs have the liberty to select clients, employees, and partners who align with their values and vision, creating a positive work environment and promoting organizational culture.",
     image: img3,
   },
   "Pride and Fulfillment": {
-    header: "Sense of Pride and Fulfillment:",
+    header: "Sense of Pride and Fulfillment",
     text: "Building and nurturing a successful business instills a deep sense of pride and fulfillment. Entrepreneurs take pride in creating something from scratch, overcoming challenges, and witnessing their vision come to life.",
     image: img4,
   },
@@ -177,11 +193,40 @@ const sections = {
 const App = () => {
   const [activeSection, setActiveSection] = useState('Experience');
 
+  const titleRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (titleRef.current) {
+      observer.observe(titleRef.current);
+    }
+
+    return () => {
+      if (titleRef.current) {
+        observer.unobserve(titleRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <Container>
-      <Header>Challenges</Header>
+    <Container isVisible={isVisible}>
+      <Header ref={titleRef} isVisible={isVisible}>
+        Challenges
+      </Header>
       <Nav>
-        {Object.keys(sections).map(section => (
+        {Object.keys(sections).map((section) => (
           <NavItem
             key={section}
             active={activeSection === section}

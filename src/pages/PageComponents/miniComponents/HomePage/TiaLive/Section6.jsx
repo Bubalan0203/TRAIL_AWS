@@ -10,32 +10,40 @@ const FAQ = () => {
 
   const faqs = [
     {
-      question: "What is TIA-TEST HUB exams?",
-      answer: "TIA-TEST HUB exams are identical to the real exams. It helps one prepare for the final examination. One can understand the exam pattern, question types, and difficulty level and improve his/her exam-taking skills."
+      question: "What is a LIVE TUTOR?",
+      answer: "LIVE TUTOR can help students and parents who are worried about their studies because sometimes school teachers, due to a lot of responsibility, are not able to pay proper attention to them. Problems faced by school teachers are that many students study at the same time and teachers are not able to handle them individually. Teachers are not able to pay attention to the needs of each student. The needs of those students whose problems are not solved immediately are forced to face a lot of difficulties in studies later on. That is why most students get distracted from their studies. Due to all these problems, students cannot score good marks on exams. TIA LIVE TUTOR online tuition platforms provide their services all over India."
     },
     {
-      question: " What is the importance of attempting TIA-TEST HUB test?",
-      answer: " TIA-TEST HUB tests are based on the actual exam pattern, giving a detailed examination overview so that one can have an idea about how to appear for the tests to score better marks."
+      question: "What are the benefits of LIVE TUTOR?",
+      answer: (
+        <ul>
+          <li>Individual attention.</li>
+          <li>Personalized schedules and techniques.</li>
+          <li>Boosts confidence of students.</li>
+          <li>Provides guidance for homework and class tests.</li>
+          <li>Assists in exam strategies.</li>
+        </ul>
+      )
     },
     {
-      question: "How to register for TIA-TEST HUB test?",
-      answer: "The steps to register for the tests by TIA-TEST HUB are provided above on this page.  We suggest the students to follow the instructions to register with us."
+      question: "What all classes come under LIVE TUTOR?",
+      answer: "The K-12 system of education is about ensuring basic elementary education to students from Kindergarten to the 12th grade."
     },
     {
-      question: "Can I attempt the mock test questions of TIA-TEST HUB on a laptop?",
-      answer: "Yes, one can attempt these tests on laptops, PCs, or even mobile."
+      question: "Is special tuition classes necessary for the students who are under LIVE TUTOR?",
+      answer: "TIA LIVE TUTOR has totally eliminated the need to go to a tuition class. Now, students do not need to travel to and from tuitions. Rather, they can attain the benefits of online coaching classes while they are at their home."
     },
     {
-      question: "How to prepare for Government Exams at home?",
-      answer: "Students can prepare for Government exams at home without joining any Coaching Institute by devoting 5 to 6 hours a day completely on self-study.  Students can join TIA EDGE for more results."
+      question: "How do students get the right tutor?",
+      answer: "TIA LIVE TUTOR connects learners with the right tutors at the right time, creating better outcomes for everyone and personalized learning experiences. Learners can access tutoring with around-the-clock availability of high-quality tutors. This combination allows educators to understand their student’s progress in real-time and provide immediate, personalized tutoring support."
     }
   ];
 
   return (
     <ProductDetailsContainer>
       <div className="faq-container">
-        <h1>Tia Live Tutor - FAQ</h1>
-        <p>Here are answers to most common questions. Can't find an answer? Call us!</p>
+        <h1>TIA Live Tutor - FAQ</h1>
+        <p>Here are answers to the most common questions. Can't find an answer? Call us!</p>
         <div className="faq-section">
           <h2>General Questions</h2>
           {faqs.map((faq, index) => (
@@ -54,52 +62,47 @@ const FAQ = () => {
 };
 
 const ProductDetailsContainer = styled.div`
-  height:auto;
+  height: auto;
   width: 100%;
-  color:White;
+  color: White;
   background-color: #0f0f12;
   padding-top: 80px;
 
   .faq-container {
     font-family: Arial, sans-serif;
-    max-width:1440px;
+    max-width: 1440px;
     margin: 0 auto;
-    padding:10px;
+    padding: 10px;
   }
-  
+
   .faq-container h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
   }
-  
+
   .faq-container p {
     font-size: 1.25rem;
     margin-bottom: 20px;
   }
-  
+
   .faq-section {
     margin-top: 20px;
   }
-  
+
   .faq-section h2 {
     font-size: 2rem;
     margin-bottom: 10px;
   }
-  
-  .faq-section h3 {
-    font-size: 1.75rem;
-    margin-bottom: 15px;
-  }
-  
+
   .faq-item {
     border-top: 1px solid #ccc;
     padding: 10px 0;
   }
-  
+
   .faq-item:first-of-type {
     border-top: none;
   }
-  
+
   .faq-question {
     display: flex;
     justify-content: space-between;
@@ -107,10 +110,10 @@ const ProductDetailsContainer = styled.div`
     font-size: 1.25rem;
     font-weight: bold;
   }
-  
+
   .faq-answer {
     padding: 10px 0;
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #fff;
   }
 
@@ -124,14 +127,11 @@ const ProductDetailsContainer = styled.div`
     .faq-section h2 {
       font-size: 1.75rem;
     }
-    .faq-section h3 {
-      font-size: 1.5rem;
-    }
     .faq-question {
       font-size: 1.125rem;
     }
     .faq-answer {
-      font-size: 0.875rem;
+      font-size: 0.975rem;
     }
   }
 
@@ -145,14 +145,11 @@ const ProductDetailsContainer = styled.div`
     .faq-section h2 {
       font-size: 1.5rem;
     }
-    .faq-section h3 {
-      font-size: 1.25rem;
-    }
     .faq-question {
       font-size: 1rem;
     }
     .faq-answer {
-      font-size: 0.75rem;
+      font-size: 0.85rem;
     }
   }
 
@@ -166,14 +163,11 @@ const ProductDetailsContainer = styled.div`
     .faq-section h2 {
       font-size: 1.25rem;
     }
-    .faq-section h3 {
-      font-size: 1rem;
-    }
     .faq-question {
       font-size: 0.875rem;
     }
     .faq-answer {
-      font-size: 0.625rem;
+      font-size: 0.725rem;
     }
   }
 `;

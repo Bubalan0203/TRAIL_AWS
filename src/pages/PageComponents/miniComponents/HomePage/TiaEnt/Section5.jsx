@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useRef, useEffect, useState } from 'react';
+import styled, { keyframes, css } from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'react-bootstrap';
 
@@ -8,9 +8,21 @@ import image2 from '../../../../../assets/img2.avif';
 import image3 from '../../../../../assets/img2.avif';
 import image4 from '../../../../../assets/img2.avif';
 
+// Animation keyframes
+const fadeInTop = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 // Styled components for CSS styling
 const Wrapper = styled.div`
-  background-color: #0f0f12;
+  background-color: #0f0f12;!important
   font-family: 'Helvetica';
 `;
 
@@ -23,6 +35,10 @@ const TestimonialSection = styled.div`
 const TestimonialTitle = styled.h2`
   text-align: center;
   color: #f00d88;
+  opacity: ${(props) => (props.isVisible ? 1 : 0)};
+  transform: ${(props) => (props.isVisible ? 'translateY(0)' : 'translateY(-100%)')};
+  transition: opacity 2s ease-out, transform 2s ease-out;
+  animation: ${(props) => (props.isVisible ? css`${fadeInTop} 2s ease-out` : 'none')};
 `;
 
 const HR = styled.hr`
@@ -70,7 +86,7 @@ const TestimonialItem = styled.div`
 
   @media (max-width: 480px) {
     width: 90%;
-    height:320px; /* Fixed height */
+    height: 320px; /* Fixed height */
     padding: 20px;
   }
 `;
@@ -85,26 +101,51 @@ const Heading = styled.h3`
   }
 
   @media (max-width: 480px) {
-    font-size: 1 rem;
+    font-size: 1rem;
   }
 `;
 
-
 const Subtext = styled.p`
   color: #fff;
-  font-size:1.1rem;
+  font-size: 1.1rem;
 
   @media (max-width: 768px) {
     font-size: 1rem;
   }
 
   @media (max-width: 480px) {
-    font-size:0.9rem;
+    font-size: 0.9rem;
   }
 `;
 
-
 const Testimonial = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const titleRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (titleRef.current) {
+      observer.observe(titleRef.current);
+    }
+
+    return () => {
+      if (titleRef.current) {
+        observer.unobserve(titleRef.current);
+      }
+    };
+  }, []);
+
   const testimonialItems = [
     {
       heading: "Uncertain Income",
@@ -145,7 +186,9 @@ const Testimonial = () => {
   return (
     <Wrapper>
       <TestimonialSection>
-        <TestimonialTitle>Challenges</TestimonialTitle>
+        <TestimonialTitle ref={titleRef} isVisible={isVisible}>
+          Challenges
+        </TestimonialTitle>
         <HR />
         <StyledCarousel>
           {testimonialItems.map((item, index) => (

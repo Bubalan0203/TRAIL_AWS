@@ -1,11 +1,54 @@
-import React from "react";
-import styled from "styled-components";
-// Replace with your image path
+import React, { useEffect, useState, useRef } from "react";
+import styled, { keyframes } from "styled-components";
 import img1 from '../../../../../assets/Edge/Need.webp';
 
+const fadeInUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const fadeInLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
 const App = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+        observer.disconnect();
+      }
+    });
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (observer && observer.unobserve) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
   return (
-    <Wrapper>
+    <Wrapper ref={ref} isVisible={isVisible}>
       <div className="container">
         <div className="content">
           <div className="images">
@@ -20,30 +63,22 @@ const App = () => {
             <h4>TIA EDGE</h4>
             <h1>NEED OF TIA EDGE</h1>
             <p>
-            TIA-Edge stands as a beacon for aspiring students, offering specialized training for a range of
-            competitive exams including NEET, IIT-JEE, NTSE, and Olympiads. Our mission is to empower
-            young talents by enhancing their capabilities and capacities, guiding them towards realizing their
-            ambitions.
+              TIA-Edge stands as a beacon for aspiring students, offering specialized training for a range of
+              competitive exams including NEET, IIT-JEE, NTSE, and Olympiads. Our mission is to empower
+              young talents by enhancing their capabilities and capacities, guiding them towards realizing their
+              ambitions.
             </p>
             <p>
-            This ensures that students receive the best possible preparation to excel in their
-            chosen exams. In India, where government jobs are highly sought-after for their stability and
-            benefits, TIA-Edge plays a crucial role in equipping candidates with the skills and confidence
-            needed to succeed in these competitive sectors.
+              This ensures that students receive the best possible preparation to excel in their
+              chosen exams. In India, where government jobs are highly sought-after for their stability and
+              benefits, TIA-Edge plays a crucial role in equipping candidates with the skills and confidence
+              needed to succeed in these competitive sectors.
             </p>
-            <div className="experience">
-              <div className="years-container">
-                <div className="years">25</div>
-              </div>
-              <div className="details">
-                <span>Years</span>
-                <span>Working</span>
-                <span>Experience</span>
-              </div>
+           
             </div>
           </div>
         </div>
-      </div>
+      
     </Wrapper>
   );
 };
@@ -56,7 +91,6 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 40px;
-  backgroundcolor:#0f0f12;
   min-height: 80vh;
   max-width: 1400px; /* Increased maximum width */
   margin: 0 auto; /* Centers the container */
@@ -92,6 +126,12 @@ const Wrapper = styled.div`
   height: 170%;
   border: 4px solid #f00d88; /* Changed border color */
   z-index: -1;
+
+  @media (max-width: 1200px) {
+ width: 70%;
+  height: 150%;
+  left: -20px;
+}
 }
 
 .image-with-outline img.first {
@@ -101,6 +141,7 @@ const Wrapper = styled.div`
   top: 30px;
   left: -110px;
   z-index: 1;
+  
 }
 
 .image-with-outline img.second {
@@ -113,27 +154,32 @@ const Wrapper = styled.div`
 
 .text {
   max-width: 600px; /* Increased text width */
+  animation: ${props => props.isVisible ? fadeInUp : 'none'} 1s ease-out;
 }
 
 .text h4 {
   color: #f00d88; /* Changed color */
   margin-bottom: 10px;
+   animation: ${props => props.isVisible ? fadeInLeft : 'none'} 1s ease-out;
 }
 
 .text h1 {
   margin-bottom: 20px;
   color: #f00d88;
+  animation: ${props => props.isVisible ? fadeInLeft : 'none'} 1s ease-out;
 }
 
 .text p {
   margin-bottom: 20px;
   font-size: 1.2rem !important;
+  animation: ${props => props.isVisible ? fadeInUp : 'none'} 1.5s ease-out;
 }
 
 .experience {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  animation: ${props => props.isVisible ? fadeInUp : 'none'} 2s ease-out;
 }
 
 .years-container {
@@ -252,7 +298,7 @@ const Wrapper = styled.div`
   }
 
   .text h1 {
-    font-size: 1 rem !important;
+    font-size: 1rem !important;
   }
 
   .text p {
@@ -260,5 +306,3 @@ const Wrapper = styled.div`
   }
 }
 `;
-
-

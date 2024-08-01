@@ -133,6 +133,7 @@ const Categories = styled.div`
     gap: 10px;
   }
 `;
+
 const CategoryButton = styled.button`
   padding: 10px 15px;
   border: none;
@@ -179,7 +180,6 @@ const CategoryButton = styled.button`
   }
 `;
 
-
 const GalleryGrid = styled.div`
   display: flex;
   flex-direction: column;
@@ -214,6 +214,7 @@ const GalleryItem = styled.div`
     }
   }
 `;
+
 const VideoSection = styled.div`
   display: flex;
   flex-direction: column;
@@ -224,75 +225,36 @@ const VideoRow = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  @media (max-width: 1200px) {
+  gap: 20px;
+
+ 
+  @media (max-width: 768px) {
     flex-direction: column;
   }
 `;
 
 const VideoColumn = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  align-items: center;
-  flex: 1;
-  @media (max-width: 1200px) {
-    flex-direction: column;
-    align-items: stretch;
+  flex: 1 1 48%;
+
+  @media (max-width: 768px) {
+    flex: 1 1 100%;
   }
 `;
 
 const VideoItem = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  align-items: center;
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
   width: 100%;
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
   iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border-radius: 8px;
   }
-
-  @media (max-width: 1200px) {
-    flex-direction: row;
-    align-items: stretch;
-    padding: 15px;
-    gap: 15px;
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: row;
-    align-items: stretch;
-    padding: 10px;
-    gap: 10px;
-  }
-
-  @media (max-width: 600px) {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 10px;
-    gap: 10px;
-
-    iframe {
-      width: 100%;
-      height: auto;
-    }
-  }
-
-  @media (max-width: 380px) {
-    iframe {
-      width: 100%;
-      height: auto;
-    }
-  }
-`;
-
-
-const VideoContent = styled.div`
-  flex: 1;
-  text-align: left;
-
 `;
 
 const LoadMoreButton = styled.button`
@@ -341,9 +303,73 @@ const allImages = [
   image99, image100
 ];
 
+const allVideos = [
+  { src: "https://youtube.com/embed/_gqQiByItxc?list=PLX-Fsvk5Eo-Azx8yKHa3Htg8HnqbYfAdU" },
+  { src: "https://youtube.com/embed/5LMls1knA9Q?list=PLX-Fsvk5Eo-AALUCRZ0ewQt8qTempnI4y" },
+  { src: "https://youtube.com/embed/ZF2Cwmxmupo?list=PLX-Fsvk5Eo-AOQzT4VdcsnrA8HGGucXoC" },
+  { src: "https://youtube.com/embed/742EVOHhZ3M?list=PLX-Fsvk5Eo-DmDQbNwkTqnB9TiBB4k2Rg" },
+  { src: "https://youtube.com/embed/kXANweJGvcE?list=PLX-Fsvk5Eo-Bwr2YuVhsKqz18CR0-ZDy-" },
+  { src: "https://youtube.com/embed/o4hcgISUbeg?list=PLX-Fsvk5Eo-CY23xVgDYqpZBjXiZC0-ge" },
+  { src: "https://youtube.com/embed/X6XQJy3AEpg?list=PLX-Fsvk5Eo-CH1_5sKU9ZxPeQfv4OhDCu" },
+  { src: "https://youtube.com/embed/M-1UOoPzUCg?list=PLX-Fsvk5Eo-CdtkBqg3zZQdAFGEL9ah8Q" },
+  { src: "https://youtube.com/embed/F6qCqrJvv4E?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/_uCjVUw_o5I?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+
+  { src: "https://youtube.com/embed/_uCjVUw_o5I?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/wCCqpIm4NMQ?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/tc8SQJx-Iq0?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/wFl0GpCLHD0?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/6cfIl4Jhz4Q?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/rKRdunHmT2I?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/bthG7j9haJU?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/nxT4DAHV-CE" },
+  { src: "https://youtube.com/embed/nxT4DAHV-CE?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/EId8NptPUfU?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+
+  { src: "https://youtube.com/embed/7qKUeldK43A?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/L7rBwbyBhEA?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/W0kIy1rVA2k?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/XE1G9cO2spc?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/Vfyhe-cgGWA?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/vR9inP3d5Ms?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/YfHU5xx9TSY?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/ox7cpE_V2yI?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/Uj-VXUt7lkI?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/_LCMZCmUk1E?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+
+  { src: "https://youtube.com/embed/kfPhH0c6ago?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/VEF95-EgJgE?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/5gl-xaPy0oc?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/cvpT235AItU?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/Ch54-crdIhQ?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/1wtot31PcCY?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/nRNSPOXMTO0?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/VvsrfCpDYGk?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/VN7lpG5Yx5c?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/8ITdt0jdwBI?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+
+  { src: "https://youtube.com/embed/UL9Diif6RwE?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/S975tEnuTag?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/jVl-4qd4C6k" },
+  { src: "https://youtube.com/embed/5Eki58IooCk" },
+  { src: "https://youtube.com/embed/xP0iUxARiH0?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/9Si3gC85LoM?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/0Sk578RrkTc?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/qAbEnuH1pw0?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/1GSjPdyx29c?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/NIEkq2oCfMI?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" },
+  { src: "https://youtube.com/embed/rlEnR3w_DM4?list=PLX-Fsvk5Eo-Dtkuj2kW3YGpdhxac9SWKQ" }
+];
+
+
 const getNextImageSet = (currentIndex, setSize) => {
   const endIndex = currentIndex + setSize;
   return allImages.slice(currentIndex, endIndex);
+};
+
+const getNextVideoSet = (currentIndex, setSize) => {
+  const endIndex = currentIndex + setSize;
+  return allVideos.slice(currentIndex, endIndex);
 };
 
 const Gallery = () => {
@@ -353,16 +379,8 @@ const Gallery = () => {
     getNextImageSet(0, 5),
     getNextImageSet(5, 5)
   ]);
-  const [loadedVideoSets, setLoadedVideoSets] = useState([
-    { src: "https://youtube.com/embed/WEE2mK2jtxk?t=15", title: "Consectetur adipisicing elit", likes: 234, comments: 123 },
-    { src: "https://youtube.com/embed/iQEPX5mx8ZY?t=4", title: "Explicabo illo", likes: 456, comments: 264 },
-    { src: "https://youtube.com/embed/xXnl2mqOnTo", title: "Video 3", likes: 345, comments: 456 },
-    { src: "https://youtube.com/embed/T-ex-DxTtQA?t=1", title: "Video 4", likes: 567, comments: 678 },
-    { src: "https://youtube.com/embed/V3fIBT-BPBw", title: "Video 5", likes: 789, comments: 890 },
-    { src: "https://youtube.com/embed/oqc_bKZAws4", title: "Video 6", likes: 101, comments: 112 },
-    { src: "https://youtube.com/embed/WEE2mK2jtxk?t=15", title: "Video 7", likes: 123, comments: 234 },
-    { src: "https://youtube.com/embed/iQEPX5mx8ZY?t=4", title: "Video 8", likes: 345, comments: 456 },
-  ]);
+  const [videoIndex, setVideoIndex] = useState(0);
+  const [loadedVideoSets, setLoadedVideoSets] = useState(getNextVideoSet(0, 12));
 
   const handleImageClick = () => {
     setCurrentSection('images');
@@ -380,11 +398,10 @@ const Gallery = () => {
   };
 
   const handleLoadMoreVideos = () => {
-    const newVideos = [
-      { src: "https://youtube.com/embed/V3fIBT-BPBw", title: "Video 9", likes: 567, comments: 678 },
-      { src: "https://youtube.com/embed/T-ex-DxTtQA?t=1", title: "Video 10", likes: 789, comments: 890 }
-    ];
-    setLoadedVideoSets(prevSets => [...prevSets, ...newVideos]);
+    const newSet = getNextVideoSet(videoIndex + loadedVideoSets.length, 3);
+    if (newSet.length > 0) {
+      setLoadedVideoSets(prevSets => [...prevSets, ...newSet]);
+    }
   };
 
   return (
@@ -425,27 +442,24 @@ const Gallery = () => {
       {currentSection === 'videos' && (
         <VideoSection>
           {loadedVideoSets.map((video, index) => (
-            index % 2 === 0 && (
-              <VideoRow key={`video-row-${Math.floor(index / 2)}`}>
+            index % 3 === 0 && (
+              <VideoRow key={`video-row-${Math.floor(index / 3)}`}>
                 <VideoColumn>
                   <VideoItem>
-                    <iframe width="350" height="200" src={video.src} title="YouTube video player" frameBorder="0" allowFullScreen></iframe>
-                    <VideoContent>
-                      <h4>{video.title}</h4>
-                      <p>By: Admin <span>{video.likes} Likes</span> <span>{video.comments} Comments</span></p>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                    </VideoContent>
+                    <iframe src={video.src} title="YouTube video player" frameBorder="0" allowFullScreen></iframe>
                   </VideoItem>
                 </VideoColumn>
                 {loadedVideoSets[index + 1] && (
                   <VideoColumn>
                     <VideoItem>
-                      <iframe width="350" height="200" src={loadedVideoSets[index + 1].src} title="YouTube video player" frameBorder="0" allowFullScreen></iframe>
-                      <VideoContent>
-                        <h4>{loadedVideoSets[index + 1].title}</h4>
-                        <p>By: Admin <span>{loadedVideoSets[index + 1].likes} Likes</span> <span>{loadedVideoSets[index + 1].comments} Comments</span></p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                      </VideoContent>
+                      <iframe src={loadedVideoSets[index + 1].src} title="YouTube video player" frameBorder="0" allowFullScreen></iframe>
+                    </VideoItem>
+                  </VideoColumn>
+                )}
+                {loadedVideoSets[index + 2] && (
+                  <VideoColumn>
+                    <VideoItem>
+                      <iframe src={loadedVideoSets[index + 2].src} title="YouTube video player" frameBorder="0" allowFullScreen></iframe>
                     </VideoItem>
                   </VideoColumn>
                 )}
@@ -454,10 +468,10 @@ const Gallery = () => {
           ))}
         </VideoSection>
       )}
-      {currentSection === 'images' && (
+      {currentSection === 'images' && loadedImageSets.flat().length < allImages.length && (
         <LoadMoreButton onClick={handleLoadMoreImages}>Load More Images →</LoadMoreButton>
       )}
-      {currentSection === 'videos' && (
+      {currentSection === 'videos' && loadedVideoSets.length < allVideos.length && (
         <LoadMoreButton onClick={handleLoadMoreVideos}>Load More Videos →</LoadMoreButton>
       )}
     </GalleryContainer>

@@ -1,11 +1,37 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import styled from '@emotion/styled';
+import styled, { keyframes, css } from 'styled-components';
 import img1 from '../../../../../assets/img2.avif';
 
 const Section4 = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      {
+        threshold: 0.5,
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -45,15 +71,15 @@ const Section4 = () => {
   ];
 
   return (
-    <ProductDetailsContainer>
-      <div className="container">    
-      <div className="header">
-            Many students and parents are concerned about education as school teachers often struggle to provide individual attention due to large class sizes and numerous responsibilities. This results in unresolved issues for some students, leading to difficulties in studies and lower exam scores.
-            <br />
-            <br />
-            TIA LIVE TUTOR offers home and online tuition services across India. Their platform provides personalized attention, helping students resolve their issues promptly and improve their academic performance. With top-tier services, TIA LIVE TUTOR ensures that each student receives the support they need to succeed in their studies.
-          </div>
+    <ProductDetailsContainer isVisible={isVisible}>
+      <div className="container" ref={sectionRef}>    
+        <div className="header">
+          Many students and parents are concerned about education as school teachers often struggle to provide individual attention due to large class sizes and numerous responsibilities. This results in unresolved issues for some students, leading to difficulties in studies and lower exam scores.
+          <br />
+          <br />
+          TIA LIVE TUTOR offers home and online tuition services across India. Their platform provides personalized attention, helping students resolve their issues promptly and improve their academic performance. With top-tier services, TIA LIVE TUTOR ensures that each student receives the support they need to succeed in their studies.
         </div>
+      </div>
 
       <div className="product-details">
         <div className="background-image" role="img" aria-label="Help image representing training models"></div>
@@ -73,14 +99,24 @@ const Section4 = () => {
   );
 };
 
+const fadeInTop = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 const ProductDetailsContainer = styled.div`
   height:auto;
   width: 100%;
   color: white;
   font-family: Helvetica;
 
-  
-.container {
+  .container {
     padding: 20px;
     text-align: center;
   }
@@ -91,6 +127,10 @@ const ProductDetailsContainer = styled.div`
     font-size: 1.2rem;
     font-weight: 700; /* Boldest font weight */
     color: #000;
+    opacity: ${(props) => (props.isVisible ? 1 : 0)};
+    transform: ${(props) => (props.isVisible ? 'translateY(0)' : 'translateY(-50%)')};
+    transition: opacity 2s ease-out, transform 3s ease-out;
+    ${(props) => props.isVisible && css`${fadeInTop} 2s ease-out`};
   }
   .product-details {
     position: relative;

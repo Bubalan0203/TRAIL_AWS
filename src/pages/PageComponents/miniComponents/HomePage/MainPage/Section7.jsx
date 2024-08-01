@@ -1,8 +1,9 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import image1 from '../../../../../assets/mainpage/Tiashwwinm.jpg';
 
-// Keyframes for the animation
+// Keyframes for the slide-up animation
 const slideUp = keyframes`
   0% {
     transform: translateY(30%);
@@ -11,6 +12,18 @@ const slideUp = keyframes`
   100% {
     transform: translateY(0);
     opacity: 1;
+  }
+`;
+
+// Keyframes for the fade-in animation
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 `;
 
@@ -39,6 +52,12 @@ const Content = styled.div`
   width: 100%;
   max-width: 600px; /* Adjust width for content */
   text-align: left; /* Ensure text alignment */
+  opacity: 0; /* Initial state for animation */
+  transform: translateY(20%); /* Initial state for animation */
+  
+  &.animate {
+    animation: ${fadeIn} 1.5s forwards;
+  }
 
   @media (min-width: 775px) {
     margin-top: 0px;
@@ -94,7 +113,7 @@ const Image = styled.img`
 
 const Button = styled.button`
   padding: 8px 10px;
-  background-color: black;
+  background-color: #333;
   border: none;
   border-radius: 25px;
   cursor: pointer;
@@ -102,7 +121,7 @@ const Button = styled.button`
   margin-top: 20px;
 
   &:hover {
-    background-color: #e08fb3;
+     background-color: #f14bb4;
   }
 
   @media (min-width: 768px) {
@@ -124,6 +143,7 @@ const Button = styled.button`
 
 const Section7 = () => {
   const imageRef = useRef(null);
+  const contentRef = useRef(null);
   const [isIntersecting, setIsIntersecting] = useState(false);
 
   useEffect(() => {
@@ -141,10 +161,16 @@ const Section7 = () => {
     if (imageRef.current) {
       observer.observe(imageRef.current);
     }
+    if (contentRef.current) {
+      observer.observe(contentRef.current);
+    }
 
     return () => {
       if (imageRef.current) {
         observer.unobserve(imageRef.current);
+      }
+      if (contentRef.current) {
+        observer.unobserve(contentRef.current);
       }
     };
   }, []);
@@ -152,13 +178,13 @@ const Section7 = () => {
   return (
     <Container>
       <ContentWrapper>
-        <Content>
-          <Title>TIA SHE WIN</Title>
+        <Content ref={contentRef} className={isIntersecting ? 'animate' : ''}>
+          <Title>TIA SHEWIN</Title>
           <Description>
-            TIA SHE WIN focuses on women entrepreneurship, encompassing the creation, management, and growth of businesses led by women. It emphasizes seizing opportunities, strategic planning, financial management, and risk-taking to achieve business goals. Government definitions stress ownership and employment criteria, highlighting women entrepreneurs' significant contributions to economic and social development globally within diverse cultural contexts.
+          TIA SHEWIN focuses on women entrepreneurship, encompassing the creation, management, and growth of businesses led by women. It emphasizes seizing opportunities, strategic planning, financial management, and risk-taking to achieve business goals. Government definitions stress ownership and employment criteria, highlighting women entrepreneurs' significant contributions to economic and social development globally within diverse cultural contexts.
           </Description>
           <a href="/tiashewin">
-          <Button>Know More</Button>
+            <Button>Know More</Button>
           </a>
         </Content>
         <ImageContainer ref={imageRef} className={isIntersecting ? 'animate' : ''}>

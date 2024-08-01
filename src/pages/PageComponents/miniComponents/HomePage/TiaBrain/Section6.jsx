@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,34 +16,44 @@ const Section7 = () => {
         { title: 'Cultural Exposure and Work Experience', points: ['Examination of the cultural exposure and diversity experienced by students in foreign education settings.'] }
     ];
 
-    const [hoveredCardIndex, setHoveredCardIndex] = useState(null);
-    const [clickedCardIndex, setClickedCardIndex] = useState(null);
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef(null);
 
-    const handleCardClick = (index) => {
-        setClickedCardIndex(index);
-    };
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect(); // To stop observing once the animation has started
+                }
+            },
+            { threshold: 0.1 }
+        );
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+        return () => observer.disconnect();
+    }, []);
 
     return (
-        <PageContainer>
+        <PageContainer ref={sectionRef}>
             <VipLoginContainer className="container">
                 <div className="row">
                     <div className="col-md-12">
                         <ProductDescription className="row g-3">
                             <div className="col-12">
-                                <h2>Indian Education vs Foreign Education</h2>
+                                <Title isVisible={isVisible}>Indian Education vs Foreign Education</Title>
                             </div>
                             {cards.map((card, index) => (
                                 <div className="col-md-6" key={index}>
                                     <Card
-                                        className={`${index === hoveredCardIndex ? 'hover' : ''} ${index === clickedCardIndex ? 'clicked' : ''}`}
-                                        onMouseEnter={() => setHoveredCardIndex(index)}
-                                        onMouseLeave={() => setHoveredCardIndex(null)}
-                                        onClick={() => handleCardClick(index)}
+                                        className={`${isVisible ? 'visible' : ''}`}
+                                        onMouseEnter={() => setIsVisible(true)}
                                     >
                                         <CardHeader>{index + 1}</CardHeader>
                                         <CardBody>
-                                            <CardTitle>{card.title}</CardTitle>
-                                            <CardText>
+                                            <CardTitle isVisible={isVisible}>{card.title}</CardTitle>
+                                            <CardText isVisible={isVisible}>
                                                 <ul>
                                                     {card.points.map((point, i) => (
                                                         <li key={i}>{point}</li>
@@ -65,7 +75,7 @@ const Section7 = () => {
 const fadeIn = keyframes`
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
@@ -73,8 +83,19 @@ const fadeIn = keyframes`
     }
 `;
 
+const slideIn = keyframes`
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+`;
+
 const PageContainer = styled.div`
-    background-color:#0f0f12;
+    background-color: #0f0f12;
     color: white;
 `;
 
@@ -83,18 +104,20 @@ const VipLoginContainer = styled.div`
 `;
 
 const ProductDescription = styled.div`
-    h2 {
-        font-size: 50px;
-        font-family:Helvetica;
-        font-weight: bold;
-        margin-bottom: 20px;
-        color: #f00d88;
-        @media (max-width: 768px) {
-            font-size: 20px;
-        }
-    }
     display: flex;
     flex-wrap: wrap;
+`;
+
+const Title = styled.h2`
+    font-size: 50px;
+    font-family: Helvetica;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #f00d88;
+    animation: ${({ isVisible }) => (isVisible ? fadeIn : 'none')} 1.5s ease-in-out;
+    @media (max-width: 768px) {
+        font-size: 20px;
+    }
 `;
 
 const Card = styled.div`
@@ -109,6 +132,7 @@ const Card = styled.div`
     box-sizing: border-box;
     cursor: pointer;
     width: 100%;
+    animation: ${({ isVisible }) => (isVisible ? slideIn : 'none')} 1s ease-in-out;
 
     &.hover {
         transform: scale(1.05);
@@ -135,8 +159,8 @@ const CardHeader = styled.div`
     color: #fff;
     font-size: 1rem;
     font-weight: bold;
-    font-family:Helvetica;
-    padding:0;
+    font-family: Helvetica;
+    padding: 0;
     margin-right: 10px;
     display: flex;
     align-items: center;
@@ -153,13 +177,14 @@ const CardBody = styled.div`
 `;
 
 const CardTitle = styled.div`
-    font-size:1.4rem;
+    font-size: 1.4rem;
     font-weight: bold;
-    font-family:Helvetica;
+    font-family: Helvetica;
     color: #f00d88;
     margin-bottom: 10px;
+    animation: ${({ isVisible }) => (isVisible ? fadeIn : 'none')} 1.5s ease-in-out;
     @media (max-width: 768px) {
-        font-size:0.8rem;
+        font-size: 0.8rem;
         font-family: Helvetica;
     }
 `;
@@ -173,6 +198,7 @@ const CardText = styled.div`
     li {
         margin-bottom: 5px;
     }
+    animation: ${({ isVisible }) => (isVisible ? fadeIn : 'none')} 1.5s ease-in-out;
     @media (max-width: 768px) {
         font-size: 1rem;
         font-family: Helvetica;

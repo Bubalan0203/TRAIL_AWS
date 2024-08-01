@@ -13,7 +13,7 @@ const mobileSectionStyle = {
 };
 
 const bodyStyle = {
-  paddingBottom: '70px', // Adjust the value as needed
+  paddingBottom: '10px', // Adjust the value as needed
 };
 
 const TiaTest = () => {

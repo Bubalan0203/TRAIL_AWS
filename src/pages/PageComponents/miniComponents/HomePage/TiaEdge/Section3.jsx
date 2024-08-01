@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import img1 from '../../../../../assets/Edge//Benefit.jpeg';
+import img1 from '../../../../../assets/Edge/Benefit.jpeg';
 
 const useIntersectionObserver = (options) => {
   const [entry, setEntry] = useState(null);
@@ -29,48 +29,85 @@ const useIntersectionObserver = (options) => {
 };
 
 const Sec2 = () => {
-  const [setNode, entry] = useIntersectionObserver({ threshold: 0.9 });
+  const [setNode1, entry1] = useIntersectionObserver({ threshold: 0.1 });
+  const [setNode2, entry2] = useIntersectionObserver({ threshold: 0.1 });
+  const [setNode3, entry3] = useIntersectionObserver({ threshold: 0.1 });
+  const [setNode4, entry4] = useIntersectionObserver({ threshold: 0.1 });
+  const [setNode5, entry5] = useIntersectionObserver({ threshold: 0.1 });
+  const [setNode6, entry6] = useIntersectionObserver({ threshold: 0.1 });
+  const [setNode7, entry7] = useIntersectionObserver({ threshold: 0.1 });
+  const [setNode8, entry8] = useIntersectionObserver({ threshold: 0.1 });
+  const [setNode9, entry9] = useIntersectionObserver({ threshold: 0.1 });
+  const [setNode10, entry10] = useIntersectionObserver({ threshold: 0.1 });
+  const [setNode11, entry11] = useIntersectionObserver({ threshold: 0.1 });
 
   useEffect(() => {
-    if (entry && entry.isIntersecting) {
-      entry.target.classList.add('fade-in');
-      entry.target.classList.add('hover-effect');
-    } else if (entry) {
-     
+    if (entry1 && entry1.isIntersecting) {
+      entry1.target.classList.add('fade-in');
     }
-  }, [entry]);
+    if (entry2 && entry2.isIntersecting) {
+      entry2.target.classList.add('fade-in');
+    }
+    if (entry3 && entry3.isIntersecting) {
+      entry3.target.classList.add('fade-in');
+    }
+    if (entry4 && entry4.isIntersecting) {
+      entry4.target.classList.add('fade-in');
+    }
+    if (entry5 && entry5.isIntersecting) {
+      entry5.target.classList.add('fade-in');
+    }
+    if (entry6 && entry6.isIntersecting) {
+      entry6.target.classList.add('fade-in');
+    }
+    if (entry7 && entry7.isIntersecting) {
+      entry7.target.classList.add('fade-in');
+    }
+    if (entry8 && entry8.isIntersecting) {
+      entry8.target.classList.add('fade-in');
+    }
+    if (entry9 && entry9.isIntersecting) {
+      entry9.target.classList.add('fade-in');
+    }
+    if (entry10 && entry10.isIntersecting) {
+      entry10.target.classList.add('fade-in');
+    }
+    if (entry11 && entry11.isIntersecting) {
+      entry11.target.classList.add('fade-in');
+    }
+  }, [entry1, entry2, entry3, entry4, entry5, entry6, entry7, entry8, entry9, entry10, entry11]);
 
   return (
     <Section id="manager">
       <Container>
         <Row>
           <Column>
-          <Image ref={setNode} src={img1} alt="Manager" />
+            <Image ref={setNode1} src={img1} alt="Manager" />
           </Column>
           <Column>
-            <TextSecondary>Benefits Of Tia Edge</TextSecondary>
-            <Description>
-            The major benefits of cracking competitive exams and securing positions in the Government,
-            Insurance, or Banking sectors:
+            <TextSecondary ref={setNode2}>Benefits Of Tia Edge</TextSecondary>
+            <Description ref={setNode3}>
+              The major benefits of cracking competitive exams and securing positions in the Government,
+              Insurance, or Banking sectors:
             </Description>
-            <PointContainer>
+            <PointContainer ref={setNode4}>
               <FontAwesomeIcon icon={faCheckCircle} size="1x" color="#f00d88" />
-              <PointText>Positions in the Government sector offer stable job security, providing employees
+              <PointText ref={setNode5}>Positions in the Government sector offer stable job security, providing employees
               with peace of mind regarding their employment.</PointText>
             </PointContainer>
-            <PointContainer>
+            <PointContainer ref={setNode6}>
               <FontAwesomeIcon icon={faCheckCircle} size="1x" color="#f00d88" />
-              <PointText>Competitive salaries, along with benefits and allowances, make these sectors
+              <PointText ref={setNode7}>Competitive salaries, along with benefits and allowances, make these sectors
               attractive, ensuring financial stability for employees and their families.</PointText>
             </PointContainer>
-            <PointContainer>
+            <PointContainer ref={setNode8}>
               <FontAwesomeIcon icon={faCheckCircle} size="1x" color="#f00d88" />
-              <PointText>Working in the Government or Banking sectors commands respect and is
+              <PointText ref={setNode9}>Working in the Government or Banking sectors commands respect and is
               considered prestigious, contributing to a positive societal status.</PointText>
             </PointContainer>
-            <PointContainer>
+            <PointContainer ref={setNode10}>
               <FontAwesomeIcon icon={faCheckCircle} size="1x" color="#f00d88" />
-              <PointText>With regulated working hours and structured policies, employees can maintain
+              <PointText ref={setNode11}>With regulated working hours and structured policies, employees can maintain
               a healthy balance between their professional and personal lives.</PointText>
             </PointContainer>
           </Column>
@@ -82,8 +119,6 @@ const Sec2 = () => {
 
 export default Sec2;
 
-
-
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -93,18 +128,9 @@ const fadeIn = keyframes`
   }
 `;
 
-const hoverEffect = keyframes`
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.1);
-  }
-`;
-
 const Section = styled.section`
   width: 100%;
-  font-family: Helvetica; /* Set the default font to Helvetica */
+  font-family: Helvetica;
 `;
 
 const Container = styled.div`
@@ -134,40 +160,32 @@ const Column = styled.div`
 `;
 
 const Image = styled.img`
-  max-width:90%;
-  width:90%;
+  max-width: 90%;
+  width: 90%;
   height: 350px;
   opacity: 0;
   transition: opacity 1.2s ease-in-out, transform 0.5s ease-in-out;
 
   &.fade-in {
     opacity: 1;
-  }
-
-  &.hover-effect {
-    animation: ${hoverEffect} 5s ;
+    animation: ${fadeIn} 1.2s ease-in-out;
   }
 `;
 
 const TextSecondary = styled.h5`
-  color:#f00d88 !important;
+  color: #f00d88 !important;
   text-align: center;
   font-size: 1.5rem;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out, transform 0.5s ease-in-out;
   @media (min-width: 991px) {
     text-align: left;
     font-size: 1.75rem;
   }
-`;
 
-const Title = styled.h2`
-  font-size: 1rem;
-  font-weight: 500;
-  color: #f00d88 !important;
-  margin-bottom: 1rem !important;
-  text-align: center;
-  @media (min-width: 991px) {
-    text-align: left;
-    font-size: 2.5rem;
+  &.fade-in {
+    opacity: 1;
+    animation: ${fadeIn} 1.2s ease-in-out;
   }
 `;
 
@@ -177,9 +195,16 @@ const Description = styled.p`
   color: #000 !important;
   text-align: center;
   font-size: 1rem;
-  @media (min-width:991px) {
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out, transform 0.5s ease-in-out;
+  @media (min-width: 991px) {
     text-align: left;
     font-size: 1.2rem;
+  }
+
+  &.fade-in {
+    opacity: 1;
+    animation: ${fadeIn} 1.2s ease-in-out;
   }
 `;
 
@@ -188,8 +213,15 @@ const PointContainer = styled.div`
   align-items: center;
   margin-bottom: 1rem !important;
   justify-content: center;
-  @media (min-width:991px) {
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out, transform 0.5s ease-in-out;
+  @media (min-width: 991px) {
     justify-content: flex-start;
+  }
+
+  &.fade-in {
+    opacity: 1;
+    animation: ${fadeIn} 1.2s ease-in-out;
   }
 `;
 
@@ -197,9 +229,16 @@ const PointText = styled.p`
   font-weight: 500;
   margin-bottom: 0 !important;
   color: #000 !important;
-  font-size:0.9rem;
+  font-size: 0.9rem;
   margin-left: 1rem;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out, transform 0.5s ease-in-out;
   @media (min-width: 991px) {
-    font-size:1.2rem;
+    font-size: 1.2rem;
+  }
+
+  &.fade-in {
+    opacity: 1;
+    animation: ${fadeIn} 1.2s ease-in-out;
   }
 `;

@@ -21,30 +21,6 @@ const fadeOut = keyframes`
   }
 `;
 
-const slideIn = keyframes`
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-`;
-
-// Keyframes for slower zoom animation
-const zoomInOut = keyframes`
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-`;
-
 // Styled components
 const Container = styled.div`
   display: flex;
@@ -73,7 +49,7 @@ const LeftPanel = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-   @media (min-width: 768px) {
+  @media (min-width: 768px) {
     margin-left: 40px;
   }
 `;
@@ -84,7 +60,7 @@ const RightPanel = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-   @media (min-width: 768px) {
+  @media (min-width: 768px) {
     margin-left: 40px;
   }
 `;
@@ -94,7 +70,8 @@ const Logo = styled.img`
   max-width: 590px;
   height: 390px;
   border-radius: 10px;
-  transition: transform 1s ease-in-out; /* Smooth transition for zoom effect */
+  opacity: 0; /* Initially hidden */
+  transition: opacity 3s ease-in-out; /* Smooth transition for fade effect */
 
   @media (min-width: 768px) {
     margin-right: 40px;
@@ -107,8 +84,12 @@ const Logo = styled.img`
     height: 290px;
   }
 
-  &.zoom {
-    animation: ${zoomInOut} 5s ease-in-out infinite; /* Slower animation */
+  &.fade-in {
+    opacity: 1; /* Fade in */
+  }
+
+  &.fade-out {
+    opacity: 0; /* Fade out */
   }
 `;
 
@@ -131,7 +112,7 @@ const Heading = styled.h1`
   align-items: center;
   text-align: center;
   opacity: 0; /* Initially hidden */
-  transition: opacity 1s ease-in-out; /* Smooth transition for fade effect */
+  transition: opacity 2s ease-in-out; /* Smooth transition for fade effect */
 
   &.fade-in {
     opacity: 1; /* Fade in */
@@ -153,7 +134,7 @@ const Text = styled.p`
   color: #666;
   margin: 0 auto;
   opacity: 0; /* Initially hidden */
-  transition: opacity 1s ease-in-out; /* Smooth transition for fade effect */
+  transition: opacity 2s ease-in-out; /* Smooth transition for fade effect */
 
   &.fade-in {
     opacity: 1; /* Fade in */
@@ -238,13 +219,13 @@ const Section8 = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          logoRef.current.classList.add('zoom');
+          logoRef.current.classList.add('fade-in');
           headingRef.current.classList.add('fade-in');
           textRef.current.classList.add('fade-in');
           headingRef.current.classList.remove('fade-out');
           textRef.current.classList.remove('fade-out');
         } else {
-          logoRef.current.classList.remove('zoom');
+          logoRef.current.classList.remove('fade-in');
           headingRef.current.classList.add('fade-out');
           textRef.current.classList.add('fade-out');
         }
@@ -274,7 +255,7 @@ const Section8 = () => {
           <Section>
             <Heading ref={headingRef} backgroundText="TIA MEDIAS">TIA MEDIAS</Heading>
             <Text ref={textRef}>
-              TIA MEDIAS provides practical, hands-on courses in visual communication, catering to artists, vis-com students, and hobbyists. Participants learn skills in writing, lighting, camerawork, editing, and directing through projects such as short films and TV ads, with no prior industry experience required.
+            TIA MEDIAS provides practical, hands-on courses in visual communication, catering to artists, vis-com students, and hobbyists. Participants learn skills in writing, lighting, camerawork, editing, and directing through projects such as short films and TV ads, with no prior industry experience required.
             </Text>
           </Section>
           <a href="/tiamedia">

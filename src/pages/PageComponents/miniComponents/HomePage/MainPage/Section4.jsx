@@ -2,6 +2,18 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import image from '../../../../../assets/mainpage/TiaLTm.png';
 
+// Keyframes for the fade-in animation from bottom
+const fadeInFromBottom = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -33,6 +45,9 @@ const Content = styled.div`
   flex: 1;
   padding: 20px;
   text-align: center;
+  opacity: 0;  // Initially hidden
+  transform: translateY(40px);  // Start from below
+  transition: opacity 0.5s ease-in-out, transform 3s ease-in-out;
 
   @media (min-width: 768px) {
     font-size: 5rem;
@@ -44,6 +59,17 @@ const Content = styled.div`
   @media (max-width: 768px) {
     font-size: 39px;
   }
+
+   @media (min-width: 1600px) {
+    margin-left: 220px;
+  }
+    @media (min-width: 1780px) {
+    margin-left: 320px;
+  }
+    @media (min-width: 1880px) {
+    margin-left: 390px;
+  }
+
 
   h1 {
     font-size: 5rem;
@@ -66,6 +92,12 @@ const Content = styled.div`
       font-size: 16px;
     }
   }
+
+  &.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+    animation: ${fadeInFromBottom} 2s ease-in-out forwards;
+  }
 `;
 
 const moveUpDown = keyframes`
@@ -85,7 +117,7 @@ const Image = styled.img`
   max-width: 500px;
   margin-top: 20px;
   border-radius: 10px;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 3.2s ease-in-out;
 
   @media (min-width: 768px) {
     width: 39%;
@@ -101,7 +133,7 @@ const Image = styled.img`
 
   &.fade-in {
     opacity: 1;
-    animation: ${moveUpDown} 2s infinite;
+    animation: ${moveUpDown} 5s infinite;
   }
 
   &.fade-out {
@@ -139,16 +171,17 @@ const KnowMoreButton = styled.button`
 
 const Section4 = () => {
   const imageRef = useRef(null);
+  const contentRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && !hasAnimated) {
             setIsVisible(true);
-          } else {
-            setIsVisible(false);
+            setHasAnimated(true);
           }
         });
       },
@@ -159,23 +192,33 @@ const Section4 = () => {
       observer.observe(imageRef.current);
     }
 
+    if (contentRef.current) {
+      observer.observe(contentRef.current);
+    }
+
     return () => {
       if (imageRef.current) {
         observer.unobserve(imageRef.current);
       }
+      if (contentRef.current) {
+        observer.unobserve(contentRef.current);
+      }
     };
-  }, []);
+  }, [hasAnimated]);
 
   return (
     <Container>
       <Row>
-        <Content>
+        <Content
+          ref={contentRef}
+          className={isVisible ? 'fade-in' : ''}
+        >
           <h1>TIA LIVE TUTOR</h1>
           <p>
-            TIA Live Tutor addresses the challenges students face in traditional classrooms by offering personalized online tutoring across India. Their platform ensures individual attention, resolving study difficulties promptly to enhance academic performance and student focus.
+           TIA LIVE TUTOR addresses the challenges students face in traditional classrooms by offering personalized online tutoring across India. Their platform ensures individual attention, resolving study difficulties promptly to enhance academic performance and student focus.
           </p>
           <a href="/tialive">
-          <KnowMoreButton>Know More</KnowMoreButton>
+            <KnowMoreButton>Know More</KnowMoreButton>
           </a>
         </Content>
         <Image

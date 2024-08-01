@@ -8,22 +8,20 @@ const useIntersectionObserver = (options) => {
   const [entry, setEntry] = useState(null);
   const [node, setNode] = useState(null);
 
-  const observer = new IntersectionObserver(([entry]) => setEntry(entry), options);
-
   useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => setEntry(entry), options);
     const currentNode = node;
-    const currentObserver = observer;
 
     if (currentNode) {
-      currentObserver.observe(currentNode);
+      observer.observe(currentNode);
     }
 
     return () => {
       if (currentNode) {
-        currentObserver.unobserve(currentNode);
+        observer.unobserve(currentNode);
       }
     };
-  }, [node, observer]);
+  }, [node, options]);
 
   return [setNode, entry];
 };
@@ -33,7 +31,7 @@ const Section5 = () => {
   const [modalShow, setModalShow] = useState(false);
   const [modalContent, setModalContent] = useState('');
   const [modalImgSrc, setModalImgSrc] = useState('');
-  const [setNode, entry] = useIntersectionObserver({ threshold: 0.9 });
+  const [setNode, entry] = useIntersectionObserver({ threshold: 0.1 });
 
   const cards = [
     {
@@ -76,9 +74,6 @@ const Section5 = () => {
   useEffect(() => {
     if (entry && entry.isIntersecting) {
       entry.target.classList.add('fade-in');
-      entry.target.classList.add('hover-effect');
-    } else if (entry) {
-
     }
   }, [entry]);
 
@@ -87,7 +82,7 @@ const Section5 = () => {
       <Section6 className="container">
         <div className="row">
           <div className="col-lg-6 col-md-12">
-            <Title>ANCIENT INDIAN EDUCATION SYSTEM AND VALUES</Title>
+            <Title ref={setNode}>ANCIENT INDIAN EDUCATION SYSTEM AND VALUES</Title>
             <VerticalCarouselContainer>
               <Arrow top onClick={() => setActiveIndex((prevIndex) => (prevIndex - 1 + cards.length) % cards.length)}>
                 <FaArrowUp />
@@ -111,7 +106,7 @@ const Section5 = () => {
           </div>
 
           <div className="col-lg-6 col-md-12">
-            <LargeCard ref={setNode}>
+            <LargeCard>
               <img src={img1} className="card-img-top fade-in" alt="Large card image" />
             </LargeCard>
           </div>
@@ -129,21 +124,23 @@ const Section5 = () => {
   );
 };
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
-
 const hoverEffect = keyframes`
   from {
     transform: scale(1);
   }
   to {
     transform: scale(1.1);
+  }
+`;
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 `;
 
@@ -224,17 +221,11 @@ const Title = styled.h1`
   color: #f00d88;
   text-align: center;
   margin-bottom: 20px;
-  animation: fadeInDown 1s ease-in-out;
+  opacity: 0; /* Start hidden */
+  animation: ${fadeIn} 1s ease-in-out forwards;
 
-  @keyframes fadeInDown {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  &.fade-in {
+    animation: ${fadeIn} 1s ease-in-out forwards;
   }
 
   @media (max-width: 992px) {
@@ -277,18 +268,15 @@ const LargeCard = styled.div`
   position: relative;
   margin-left: 10%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  animation: ${fadeIn} 1.5s ease-in-out forwards;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0;
-    animation: ${fadeIn} 1.5s ease-in-out forwards;
   }
 
   &.fade-in img {
-    opacity: 1;
+    animation: ${fadeIn} 1.5s ease-in-out forwards;
   }
 
   &.hover-effect img {

@@ -38,7 +38,7 @@ const OverlayTitle = styled.h1`
 `;
 
 const OverlayText = styled.p`
-  font-size: 24px;
+  font-size: 21px;
   width: 80%;
   max-width: 1100px;
   margin: 0 auto;
@@ -92,7 +92,7 @@ const ImageSlider = () => {
       <Overlay>
         <OverlayTitle>About our company</OverlayTitle>
         <OverlayText>
-          Our learning company prioritizes continuous employee development, fostering a culture of innovation and adaptability to stay competitive in evolving markets.
+        Talent Initiators & Accelerators India private limited empowers innovative entrepreneurship. Any venture is only as strong as the people who bring it to life. We are here to bring life to those who bring as many innovative & creative ideas as possible.
         </OverlayText>
       </Overlay>
     </AboutCompany>

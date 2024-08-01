@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const useIntersectionObserver = (options) => {
   const [entry, setEntry] = useState(null);
   const [node, setNode] = useState(null);
+  
 
   const observer = new IntersectionObserver(([entry]) => setEntry(entry), options);
 

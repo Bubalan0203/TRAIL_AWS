@@ -16,7 +16,7 @@ import img from '../../../../../assets/mainpage/logo.png';
 
 
 
-const Navbar = () => {
+const Navbar = ({ scrollToSection, section15Ref }) => {
     const [neurosurgeryDropdown, setNeurosurgeryDropdown] = useState(false);
     const [companyDropdown, setCompanyDropdown] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -32,6 +32,15 @@ const Navbar = () => {
         clearInterval(interval);
       };
     }, []); // Empty dependency array ensures effect runs only once on mount
+    
+
+
+    const handleFranchiseClick = (event) => {
+      event.preventDefault(); // Prevent the default link behavior
+      scrollToSection(section15Ref); // Scroll to Section15
+  };
+
+
 
     const openModal = () => {
       setModalOpen(true);
@@ -156,7 +165,9 @@ const Navbar = () => {
                     </div>
                 </Link>
 
-               
+                <Link to="/" onClick={handleFranchiseClick}>Franchise</Link>
+
+
                 <Link href="/gallery">Gallery</Link>
                 <Link>
                 <div
@@ -600,9 +611,21 @@ const DropdownMenu = styled.div`
     left: 170px; /* Adjust as needed */
     right: 10%;
 
-    @media (min-width: 1024px) and (max-width: 1190px) {
+     @media (min-width: 1280px) and (max-width: 1380px) {
       left: 120px;
       right: 7%;
+    }
+      @media (min-width: 1200px) and (max-width: 1280px) {
+      left: 80px;
+      right: 5%;
+    }
+    @media (min-width: 1100px) and (max-width: 1200px) {
+      left: 80px;
+      right: 5%;
+    }
+       @media (min-width: 1024px) and (max-width: 1100px) {
+      left: 80px;
+      right: 4%;
     }
   }
 
@@ -635,7 +658,7 @@ const DropdownRow = styled.div`
 
 const DropdownItem = styled.div`
     flex-basis: calc(33.33% - 20px);
-    margin: 10px;
+    margin: 8px;
     padding: 1rem;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -645,10 +668,11 @@ const DropdownItem = styled.div`
     width: 100%;
     max-width: 100%;
     color: #333;
+    
 
     &:hover {
         background-color: #9999;
-        color: #FF007F ; /* Text color changes to pink on hover */
+        color: #FF007F; /* Text color changes to pink on hover */
     }
 
     a {
@@ -676,8 +700,10 @@ const DropdownItem = styled.div`
          font-weight: 590;
 
          @media (max-width: 1024px) {
-            
             font-size: 12px;
+        }
+            @media (min-width: 1024px) and (max-width: 1180px) {
+            font-size: 14px;
         }
     }
 
@@ -688,6 +714,9 @@ const DropdownItem = styled.div`
         @media (max-width: 1024px) {
             margin: 5px 0 0;
             font-size: 10px;
+        }
+             @media (min-width: 1024px) and (max-width: 1200px) {
+            font-size: 12px;
         }
     }
 `;
@@ -720,13 +749,10 @@ const DropdownItemCom = styled.div`
         margin-left: 0px;
         padding:10px;
 
-        &:hover {
-            color: #FF007F;
-        }
     }
 
     &:hover {
-        background-color: black;
+        background-color:#999;
         color: black;
     }
         
@@ -771,16 +797,46 @@ const BookSimulation = styled(Link)`
         text-align:center;
     }
 
-    @media  (min-width: 1450px) and (max-width: 1550px) {
-        margin-left:300px;
+
+@media  (min-width: 2000px) and (max-width: 2500px) {
+        margin-left:600px;
+        margin-right:0;
+    }
+
+     @media  (min-width: 1900px) and (max-width: 2000px) {
+        margin-left:540px;
+        margin-right:0;
+    }
+     @media  (min-width: 1800px) and (max-width: 1900px) {
+        margin-left:490px;
+        margin-right:0;
+    }
+    @media  (min-width: 1700px) and (max-width: 1800px) {
+        margin-left:450px;
+        margin-right:0;
+    }
+ @media  (min-width: 1600px) and (max-width: 1700px) {
+        margin-left:420px;
+        margin-right:0;
+    }
+    @media  (min-width: 1570px) and (max-width: 1600px) {
+        margin-left:380px;
+        margin-right:0;
+    }
+    @media  (min-width: 1500px) and (max-width: 1570px) {
+        margin-left:360px;
+        margin-right:0;
+    }
+    @media  (min-width: 1450px) and (max-width: 1500px) {
+        margin-left:320px;
         margin-right:0;
     }
      @media  (min-width: 1380px) and (max-width: 1450px) {
-        margin-left:290px;
+        margin-left:300px;
         margin-right:0;
     }
          @media  (min-width: 1310px) and (max-width: 1380px) {
-        margin-left:260px;
+        margin-left:270px;
         margin-right:0;
     }
     @media  (min-width: 1260px) and (max-width: 1310px) {

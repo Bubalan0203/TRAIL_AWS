@@ -2,8 +2,122 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel, Card, Button, Container, Row, Col, Modal } from 'react-bootstrap';
-
 import img1 from '../../../../../assets/Brain/Brain.jpg';
+import { CSSTransition } from 'react-transition-group';
+
+
+
+
+const StyledModal = styled(Modal)`
+  .modal-dialog {
+    max-width: 35%;
+    max-height: 70vh;
+    margin: auto;
+    
+    @media (max-width: 1200px) {
+      max-width: 45%;
+      max-height: 65vh;
+    }
+
+    @media (max-width: 992px) {
+      max-width: 50%;
+      max-height: 60vh;
+    }
+
+    @media (max-width: 768px) {
+      max-width: 50%;
+      max-height: 55vh;
+    }
+
+    @media (max-width: 576px) {
+      max-width: 70%;
+      max-height: 50vh;
+    }
+  }
+
+  .modal-content {
+    border-radius: 10px;
+    color: #fff;
+  }
+`;
+
+
+
+const CloseButton = styled.button`
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  position:absolute;
+  right:20px;
+  top:1px;
+
+  &:hover {
+    color: #000;
+  }
+
+  @media (max-width: 992px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 576px) {
+    font-size: 1.2rem;
+  }
+`;
+
+const StyledModalBody = styled(Modal.Body)`
+  background: linear-gradient(to bottom, rgba(180, 65, 133, 0.9), #232e34);
+  color: #fff;
+  padding: 1.8rem;
+  align-items: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  font-size: 0.9rem;
+
+  @media (max-width: 992px) {
+    font-size: 0.8rem;
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+    padding: 1rem;
+  }
+
+  @media (max-width: 576px) {
+    font-size: 0.6rem;
+    padding: 0.8rem;
+  }
+`;
+
+const StyledImage = styled.img`
+  display: block;
+  width: 90%;
+  height: auto;
+  max-height: 30vh;
+  margin: 0 auto 1rem auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 992px) {
+    width: 90%;
+    max-height: 35vh;
+  }
+
+  @media (max-width: 768px) {
+    width: 87%;
+    max-height: 30vh;
+  }
+
+  @media (max-width: 576px) {
+    width:70%;
+    max-height:20vh;
+  }
+`;
+
 
 const TiaBrain = () => {
     const cardData = [
@@ -26,15 +140,15 @@ const TiaBrain = () => {
     ];
 
     const modalData = [ 
-        {content: "At the core of our thoughts, emotions, and behaviors is the communication between neurons in our brains,  producing brainwaves through synchronized electrical pulses. These brainwaves, detected using sensors on the scalp, are categorized into bandwidths to describe their functions but are better seen as a continuous spectrum of consciousness. Brainwaves range from Delta waves, which are slow, loud, and functional, to Gamma waves, which are fast,  subtle, and complex. An analogy is comparing brainwaves to musical notes: low-frequency waves resemble a deep drum beat, while high-frequency waves are like a high-pitched flute. Our brainwaves shift with our  activities and emotions. Dominance of slower waves can make us feel tired or dreamy, whereas higher  frequencies make us feel wired or hyper-alert. Although these descriptions are general, in reality, brainwaves are more complex and reflect different aspects based on their brain location. Brainwave speed, measured in Hertz (cycles per second), is divided into bands indicating slow, moderate, and fast waves.",imgSrc:img1},
+        {content: "At the core of our thoughts, emotions, and behaviors is the communication between neurons in our brains,  producing brainwaves through synchronized electrical pulses. These brainwaves, detected using sensors on the scalp, are categorized into bandwidths to describe their functions but are better seen as a continuous spectrum of consciousness. Brainwaves range from Delta waves, which are slow, loud, and functional, to Gamma waves, which are fast,  subtle, and complex. An analogy is comparing brainwaves to musical notes: low-frequency waves resemble a deep drum beat, while high-frequency waves are like a high-pitched flute. Our brainwaves shift with our  activities and emotions. Dominance of slower waves can make us feel tired or dreamy, whereas higher  frequencies make us feel wired or hyper-alert. ",imgSrc:img1},
         {content:"Before discussing specifics, it's important to understand that when I mention a particular brainwave, I'm referring to its dominance. Throughout the day, your EEG will display all five types of brainwaves simultaneously, but one will dominate depending on your state of consciousness. For instance, if you're awake but have severe ADHD, slower waves (alpha and/or theta) might be more prominent than beta waves. During sleep, slower frequencies are common, but even gamma waves can be involved in REM sleep.",imgSrc:img1},
         {content:"Gamma waves, ranging from 40 Hz to 100 Hz, are crucial for higher processing tasks, learning, memory, and information processing. The 40 Hz gamma wave is particularly important for sensory binding and perception. Individuals with lower gamma activity often face learning disabilities and mental challenges. The frequency range is from 40 Hz to 100 Hz, which is the highest. Too much gamma activity can lead to anxiety, high arousal, and stress. Too little gamma activity can result in ADHD, depression, and learning disabilities. Optimal gamma activity is essential for binding senses, cognition, information processing, learning, perception, and REM sleep. Gamma waves can be increased through meditation",imgSrc:img1},
         {content:"Beta waves, known as high-frequency, low-amplitude brainwaves, are commonly observed when we are awake. They play a role in conscious thought and logical thinking, helping us focus and complete tasks. However, excessive beta activity can lead to stress and anxiety, while too little can result in ADHD, daydreaming, and poor cognition. Beta waves increase with stimulants like caffeine. The frequency range is from 12 Hz to 40 Hz, which is high. Too much beta activity can cause adrenaline, anxiety, high arousal, inability to relax, and stress. Too little beta activity can lead to ADHD, daydreaming, depression, and poor cognition. Optimal beta activity is essential for conscious focus, memory, and problem-solving. Beta waves can be increased through coffee, energy drinks, and various stimulants.",imgSrc:img1},
         {content:"The alpha frequency range serves as a bridge between conscious thinking and the subconscious mind. It induces feelings of deep relaxation and helps us calm down when needed. Stress can lead to alpha blocking, where excessive beta activity inhibits alpha production. This occurs when we become overly aroused. The frequency range is from 8 Hz to 12 Hz, which is moderate. Too much alpha activity can lead to daydreaming, inability to focus, and excessive relaxation. Too little alpha activity can result in anxiety, high stress, insomnia, and OCD. Optimal alpha activity is essential for relaxation. Alpha waves can be increased through alcohol, marijuana, relaxants, and some antidepressants.",imgSrc:img1},
         {content:"Theta waves, ranging from 4 Hz to 8 Hz, are associated with daydreaming and deep emotions. Excessive theta activity may lead to depression and heightened suggestibility due to deep relaxation. However, moderate theta levels can enhance intuition, creativity, and a sense of naturalness. Theta is also important for restorative sleep. The frequency range is from 4 Hz to 8 Hz, which is slow. Too much theta activity can lead to ADHD, depression, hyperactivity, impulsivity, and inattentiveness. Too little theta activity can result in anxiety, poor emotional awareness, and stress. Optimal theta activity is essential for creativity, emotional connection, intuition, and relaxation. Theta waves can be increased through depressants.",imgSrc:img1},
-        {content:"Delta waves, the slowest recorded brainwaves (0 Hz to 4 Hz), are most commonly found in infants and young children. They signify deep relaxation and restorative sleep, aiding in unconscious bodily functions like heart rate regulation and digestion. Adequate delta production ensures rejuvenating sleep, but abnormal activity can lead to learning disabilities or diminished conscious awareness, particularly in cases of brain injuries. The frequency range is from 0 Hz to 4 Hz, which is the slowest. Too much delta activity can lead to brain injuries, learning problems, severe ADHD, and impaired thinking. Too little delta activity can result in poor body rejuvenation, diminished brain revitalization, and sleep disturbances. Optimal delta activity is essential for immune system support, natural healing, and restorative sleep. Delta waves can be increased through depressants and sleep.",imgSrc:img1},
+        {content:"Delta waves, the slowest recorded brainwaves (0 Hz to 4 Hz), are most commonly found in infants and young children. They signify deep relaxation and restorative sleep, aiding in unconscious bodily functions like heart rate regulation and digestion. Adequate delta production ensures rejuvenating sleep, but abnormal activity can lead to learning disabilities or diminished conscious awareness, particularly in cases of brain injuries. The frequency range is from 0 Hz to 4 Hz, which is the slowest. Too much delta activity can lead to brain injuries, learning problems, severe ADHD, and impaired thinking. Too little delta activity can result in poor body rejuvenation, diminished brain revitalization, and sleep disturbances. Optimal delta activity is essential for immune system support, natural healing, and restorative sleep. ",imgSrc:img1},
         {content:"Indeed, it's a common misconception to think of producing only one type of brainwave during specific activities, like generating alpha during meditation. In reality, our brain activity involves a blend of all frequencies simultaneously, with some being more prominent depending on the task or state of consciousness. The categories simply help describe the shifts in brain activity we observe during different activities.The important takeaway is balance. Regularly producing too much or too little of any brainwave frequency can lead to various issues. Striving for a balanced mix of brainwave activity is essential for optimal cognitive functioning and overall well-being.",imgSrc:img1},
-        {content:"Flexibility and resilience are both crucial for optimal brain functioning. Flexibility allows us to adapt our brain activity to match the demands of different situations. For instance, we need beta waves for focus at work but may benefit from more alpha waves to relax at home or slow down for sleep. When we can't shift our brain activity accordingly, we encounter difficulties. Similarly, after brain injury or trauma, the brain may stabilize by slowing down, but if it remains stuck in this pattern, it can lead to concentration issues and cognitive difficulties.Resilience, on the other hand, is about stability and the ability to bounce back from negative events. Just as resilient individuals are healthier and happier, a resilient brain can recover from unhealthy habits or stressors. Building resilience in the brain is essential for maintaining effectiveness and well-being. When things go awry, it's often because our brain lacks either flexibility or resilience.",imgSrc:img1},
+        {content:"Flexibility and resilience are both crucial for optimal brain functioning. Flexibility allows us to adapt our brain activity to match the demands of different situations. For instance, we need beta waves for focus at work but may benefit from more alpha waves to relax at home or slow down for sleep. When we can't shift our brain activity accordingly, we encounter difficulties. Similarly, after brain injury or trauma, the brain may stabilize by slowing down, but if it remains stuck in this pattern, it can lead to concentration issues and cognitive difficulties.Resilience, on the other hand, is about stability and the ability to bounce back from negative events. Just as resilient individuals are healthier and happier, a resilient brain can recover from unhealthy habits or stressors. ",imgSrc:img1},
         {content:"Achieving both flexibility and resilience in the brain requires access to a variety of different brain states, each characterized by specific patterns and types of brainwave frequencies. EEG biofeedback, also known as neurofeedback, enhances both flexibility and resilience by utilizing EEG to observe brainwave activity. It's crucial to understand neurofeedback as a method for training the behavior of brainwaves rather than promoting one specific type of activity. For overall health and wellness, we require a balance of all brainwave types. However, it's essential for the brain to have the flexibility and resilience to adjust its activity according to the demands of the moment. This adaptability allows us to effectively navigate various tasks and situations throughout our daily lives.",imgSrc:img1},
         {content:"Injury, medications (including alcohol), fatigue, emotional distress, pain, and stress can all create patterns in our brain activity that are difficult to shift. These patterns can be likened to chaotic attractors in chaos theory, where our brain gets stuck in a particular behavior. Being stuck in such a pattern hinders flexibility and resilience, keeping us in a state we don't want to be in and making it challenging to redirect our focus and energy elsewhere. Achieving flexibility and resilience requires breaking free from these patterns and allowing our brain to adapt to different situations and demands.",imgSrc:img1},
         {content:"Delta brainwaves are indeed the slowest but most prominent brainwaves, akin to a deep drum beat in terms of frequency and penetration. They are primarily generated during the deepest states of meditation and dreamless sleep. Delta waves lead to a suspension of external awareness and are associated with empathy. Moreover, this state stimulates healing and regeneration, underscoring the importance of deep restorative sleep in the overall healing process.",imgSrc:img1},
@@ -94,18 +208,17 @@ const TiaBrain = () => {
                             </Carousel.Item>
                         ))}
                     </Carousel>
-                    <Modal show={modalShow} onHide={handleCloseModal} size="lg" centered>
-                        <StyledModalHeader>
-                            <Modal.Title></Modal.Title>
-                            <CloseButton onClick={handleCloseModal} aria-label="Close">
-                                &times;
-                            </CloseButton>
-                        </StyledModalHeader>
-                        <StyledModalBody>
-                            <StyledImage src={modalImgSrc} alt="Modal content" />
-                            {modalContent}
-                        </StyledModalBody>
-                    </Modal>
+                    <CSSTransition in={modalShow} timeout={300} classNames="fade" unmountOnExit>
+                    <StyledModal show={modalShow} onHide={handleCloseModal} centered>
+          <StyledModalBody>
+    <CloseButton onClick={handleCloseModal} aria-label="Close">
+        &times;
+      </CloseButton>
+      <StyledImage src={modalImgSrc} alt="Modal content" />
+      {modalContent}
+    </StyledModalBody>
+  </StyledModal>
+</CSSTransition>
                 </Container>
             </Section3>
         </>
@@ -338,59 +451,4 @@ const Section3 = styled.div`
         }
     }
 `;
-
-const StyledModalHeader = styled(Modal.Header)`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  padding: 2.5rem;
-  border-bottom: none;
-  background-color: #232e34;
-
-  @media (max-width: 991px) {
-    padding: 1.5rem;
-  }
-`;
-
-const CloseButton = styled.button`
-  position: absolute;
-  top: 50%;
-  right: 1rem;
-  transform: translateY(-50%);
-  color: #fff;
-  background-color: #232e34;
-  border: none;
-  padding: 10px;
-  font-size: 2.5rem;
-  cursor: pointer;
-
-  @media (max-width: 991px) {
-    font-size: 1.5rem !important;
-  }
-`;
-
-const StyledModalBody = styled(Modal.Body)`
-  background-color: #232e34; /* Dark background color */
-  color: #fff; /* Light text color */
-  position: relative;
-  font-size: 1.2em !important; /* Font size with !important flag */
-
-  @media (max-width: 991px) {
-    font-size: 1em !important;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 0.8em !important;
-  }
-`;
-
-const StyledImage = styled.img`
-  display: block;
-  width: 100%;
-  height: 40vh;
-  max-height: 60vh;
-  margin-bottom: 1rem;
-`;
-
 export default TiaBrain;

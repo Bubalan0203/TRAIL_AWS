@@ -10,32 +10,45 @@ const FAQ = () => {
 
   const faqs = [
     {
-      question: "What is TIA-TEST HUB exams?",
-      answer: "TIA-TEST HUB exams are identical to the real exams. It helps one prepare for the final examination. One can understand the exam pattern, question types, and difficulty level and improve his/her exam-taking skills."
+      question: "What is MOC?",
+      answer: "MOC (Miracle Of Communication) will help anyone to communicate easier in English. It is a TONGUE-MIND coordination technique to learn a new language. The program is available in a state-of-art software which guides a language learner to confidently speak in the language in a short span of time."
     },
     {
-      question: " What is the importance of attempting TIA-TEST HUB test?",
-      answer: " TIA-TEST HUB tests are based on the actual exam pattern, giving a detailed examination overview so that one can have an idea about how to appear for the tests to score better marks."
+      question: "How many levels are there in MOC?",
+      answer: "The software has 12 stages of 25 formulas each, putting together 300 formulas to learn a new language. Duration of each level depends upon the child’s passion to learn a new language."
     },
     {
-      question: "How to register for TIA-TEST HUB test?",
-      answer: "The steps to register for the tests by TIA-TEST HUB are provided above on this page.  We suggest the students to follow the instructions to register with us."
+      question: "What are the basic necessities to undergo a MOC program?",
+      answer: "A desktop or laptop and a good net connection."
     },
     {
-      question: "Can I attempt the mock test questions of TIA-TEST HUB on a laptop?",
-      answer: "Yes, one can attempt these tests on laptops, PCs, or even mobile."
+      question: "Is it of any benefit academically learning this MOC program?",
+      answer: "Yes, it will help to make the communication easier with their teachers if they are at school. If they are working, it will help in their career. Even in business, people are benefited with this MOC program."
     },
     {
-      question: "How to prepare for Government Exams at home?",
-      answer: "Students can prepare for Government exams at home without joining any Coaching Institute by devoting 5 to 6 hours a day completely on self-study.  Students can join TIA EDGE for more results."
+      question: "What is the required age limit for this MOC program?",
+      answer: "Anyone from 10 years to any age. Anyone at any age can start learning a new language. The MOC program is meticulously designed to appreciate learners of any age group. We have kept in our heart, people of every age as well their speed of learning in designing our program."
+    },
+    {
+      question: "What are the benefits of the MOC program?",
+      answer: (
+        <ul>
+          <li>Enhanced Cognitive Abilities</li>
+          <li>Personal Growth and Improved Self-Confidence</li>
+          <li>Easier Traveling</li>
+          <li>More Opportunities for Social Connections</li>
+          <li>More Employment Opportunities</li>
+          <li>Broadening of Your Perspective</li>
+        </ul>
+      )
     }
   ];
 
   return (
     <ProductDetailsContainer>
       <div className="faq-container">
-        <h1>Tia Mock - FAQ</h1>
-        <p>Here are answers to most common questions. Can't find an answer? Call us!</p>
+        <h1>MOC - FAQ</h1>
+        <p>Here are answers to the most common questions about MOC. Can't find an answer? Call us!</p>
         <div className="faq-section">
           <h2>General Questions</h2>
           {faqs.map((faq, index) => (
@@ -54,52 +67,47 @@ const FAQ = () => {
 };
 
 const ProductDetailsContainer = styled.div`
-  height:auto;
+  height: auto;
   width: 100%;
-  color:White;
+  color: White;
   background-color: #0f0f12;
-  padding-top:80px;
+  padding-top: 80px;
 
   .faq-container {
     font-family: Arial, sans-serif;
-    max-width:1440px;
+    max-width: 1440px;
     margin: 0 auto;
-    padding:10px;
+    padding: 10px;
   }
-  
+
   .faq-container h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
   }
-  
+
   .faq-container p {
     font-size: 1.25rem;
     margin-bottom: 20px;
   }
-  
+
   .faq-section {
     margin-top: 20px;
   }
-  
+
   .faq-section h2 {
     font-size: 2rem;
     margin-bottom: 10px;
   }
-  
-  .faq-section h3 {
-    font-size: 1.75rem;
-    margin-bottom: 15px;
-  }
-  
+
   .faq-item {
     border-top: 1px solid #ccc;
     padding: 10px 0;
   }
-  
+
   .faq-item:first-of-type {
     border-top: none;
   }
-  
+
   .faq-question {
     display: flex;
     justify-content: space-between;
@@ -107,11 +115,11 @@ const ProductDetailsContainer = styled.div`
     font-size: 1.25rem;
     font-weight: bold;
   }
-  
+
   .faq-answer {
     padding: 10px 0;
-    font-size: 1rem;
     color: #fff;
+    font-size:1.1rem;
   }
 
   @media (max-width: 1200px) {
@@ -124,14 +132,11 @@ const ProductDetailsContainer = styled.div`
     .faq-section h2 {
       font-size: 1.75rem;
     }
-    .faq-section h3 {
-      font-size: 1.5rem;
-    }
     .faq-question {
       font-size: 1.125rem;
     }
     .faq-answer {
-      font-size: 0.875rem;
+      font-size: 0.975rem;
     }
   }
 
@@ -145,14 +150,11 @@ const ProductDetailsContainer = styled.div`
     .faq-section h2 {
       font-size: 1.5rem;
     }
-    .faq-section h3 {
-      font-size: 1.25rem;
-    }
     .faq-question {
       font-size: 1rem;
     }
     .faq-answer {
-      font-size: 0.75rem;
+      font-size: 0.85rem;
     }
   }
 
@@ -166,14 +168,11 @@ const ProductDetailsContainer = styled.div`
     .faq-section h2 {
       font-size: 1.25rem;
     }
-    .faq-section h3 {
-      font-size: 1rem;
-    }
     .faq-question {
       font-size: 0.875rem;
     }
     .faq-answer {
-      font-size: 0.625rem;
+      font-size: 0.725rem;
     }
   }
 `;

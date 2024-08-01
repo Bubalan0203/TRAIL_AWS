@@ -74,16 +74,16 @@ function Section6() {
             </div>
             <div className="col-lg-6">
               <div className="container1">
-                <h2>TIA MOCK</h2>
-                <p>Talent Initiators & Accelerators India Private Limited introduces Miracle of Communication & Knowledge (MOCK). This program aims to empower individuals to share their ideas globally without reliance on intermediaries. By focusing on tongue-mind coordination, it helps learners effectively use their presence of
-                    mind in various situaVons to learn new languages.</p>
+                <h2>TIA MOC</h2>
+                <p>Talent Initiators & Accelerators India Private Limited introduces Miracle of Communication & Knowledge (MOC). This program aims to empower individuals to share their ideas globally without reliance on intermediaries. By focusing on tongue-mind coordination, it helps learners effectively use their presence of
+                    mind in various situations to learn new languages.</p>
               </div>
             </div>
           </div>
           <div className="row">
             <div className="col-lg-6">
               <div className="container1">
-                <h2>Science Behind TIA MOCK</h2>
+                <h2>Science Behind TIA MOC</h2>
                 <p>One of the key advantages of foreign education is the plethora of educational possibilities it offers. Students
                  have the freedom to choose from a diverse range of courses that align with their career goals and learning
                   preferences. This diversity ensures that students can pursue a course that best meets their individual needs
@@ -101,7 +101,7 @@ function Section6() {
             <div className="col-lg-6">
               <div className="container1">
                 <h2>Need for Learning Multiple Languages</h2>
-                <p>Learning a new language significantly benefits the brain, enhancing cultural and cognitive understanding while protecting against neurological degeneraVon. This valuable skill is accessible to anyone at any age, promoting lifelong learning and mental
+                <p>Learning a new language significantly benefits the brain, enhancing cultural and cognitive understanding while protecting against neurological degeneration. This valuable skill is accessible to anyone at any age, promoting lifelong learning and mental
                    agility.</p>
               </div>
             </div>
