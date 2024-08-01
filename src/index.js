@@ -7,7 +7,6 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
-import { GlobalProvider } from "./assets/contex/GlobalContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -15,9 +14,7 @@ root.render(
   <React.StrictMode>
     <SnackbarProvider>
       <BrowserRouter>
-        <GlobalProvider>
           <App />
-        </GlobalProvider>
       </BrowserRouter>
     </SnackbarProvider>
   </React.StrictMode>
